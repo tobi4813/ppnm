@@ -1,2 +1,1 @@
-# ppnm
-# ppnm
+# Practical programming with numerical methods
