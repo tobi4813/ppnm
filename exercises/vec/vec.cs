@@ -36,8 +36,22 @@ public class vec
 	{
 		return u*(-1);
 	}
-	public static double operator% (vec u, vec v)
+	public static double operator*(vec u, vec v)
 	{
 		return u.x * v.x + u.y * v.y + u.z * v.z;
+	}
+	public double dot(vec v)
+	{
+		return this.x * v.x + this.y * v.y + this.z * v.z;
+	}
+	public vec cross(vec v)
+	{
+		return new vec(this.y * v.z - this.z * v.y,
+					   this.z * v.x - this.x * v.z, 
+					   this.x * v.y - this.y * v.x);
+	}
+	public double norm()
+	{
+		return this*this;
 	}
 }

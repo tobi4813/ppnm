@@ -13,6 +13,10 @@ public static class main
 		vec w = u*2;
 		w.print("u*2=");
 		(-u).print("-u=");
-		WriteLine($"u*v = {u%v}");
+		WriteLine($"u*v = {u*v}");
+		WriteLine($"u*v = {u.dot(v)}");
+		vec crossed = u.cross(v);
+		crossed.print("u x v = ");
+		WriteLine($"|u| = {u.norm()}");
 	}
 }
