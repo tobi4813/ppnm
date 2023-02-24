@@ -1,0 +1,20 @@
+hello
+complex number z=(-1,0)
+sqrt(-1)=(6.12303176911189E-17,1)
+sqrt(-1) very close to -i
+
+complex number z=(0,1)
+exp(z)=(0.54030230586814,0.841470984807897)
+
+exp(i*PI)=(-1,1.22460635382238E-16)
+exp(i*pi) Very close to -1+0i
+
+i^i=(0.207879576350762,0)
+i^i Very close to exp(-pi/2)=0.207879576350762
+
+ln(i)=(0,1.5707963267949)
+ln(i) Very close to i*Pi/2=1.5707963267949i
+
+sin(i*Pi)=(0,11.5487393572577)
+sin(i*Pi) Very close to sinh(pi)*i=11.5487393572577i
+
