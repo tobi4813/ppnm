@@ -45,7 +45,7 @@ public class QRGS
 		for(int i=0;i<m;i++)
 		{
 			vector unitVector = new vector(m);
-			for(int j=0;j<m;j++){if(j != i) unitVector[j] = 0; else unitVector[j] = 1;}
+			for(int j=0;j<m;j++) if(j == i) unitVector[j] = 1;
 			inverseA[i] = this.solve(unitVector);
 		}
 		return inverseA;
