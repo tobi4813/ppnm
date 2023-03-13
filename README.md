@@ -2,4 +2,4 @@
 
 ## Homeworks:
 Linear equations: A and B
-Eigenvalues: A
+\nEigenvalues: A
