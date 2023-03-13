@@ -148,12 +148,14 @@ public void set_unity(){
 		}
 	}
 }
-public void setid(){
-	for(int i=0;i<size1;i++){
+public void setid()
+{
+	for(int i=0;i<size1;i++)
+	{
 		this[i,i]=1;
 		for(int j=i+1;j<size2;j++){ this[i,j]=0;this[j,i]=0; }
 	}
-	}
+}
 
 public void set_zero(){
 	for(int j=0;j<size2;j++)
@@ -231,6 +233,26 @@ public bool approx(matrix B,double acc=1e-6, double eps=1e-6){
 			if(!approx(this[i,j],B[i,j],acc,eps))
 				return false;
 	return true;
+}
+
+public void randomize()
+{
+	var rnd = new Random();
+	for(int i=0;i<this.size1;i++) for(int j=0;j<this.size2;j++) this[i,j] = rnd.NextDouble();
+}
+
+public void randomizeSymmetric()
+{
+	var rnd = new Random(1);
+	for(int i=0;i<this.size1;i++) 
+		for(int j=0;j<this.size2;j++)
+		{
+			if (i>=j)
+			{
+				this[i,j] = rnd.NextDouble();
+				this[j,i] = this[i,j];
+			}
+		}
 }
 
 }//matrix

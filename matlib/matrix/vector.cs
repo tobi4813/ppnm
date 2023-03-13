@@ -154,4 +154,11 @@ public bool approx(vector o){
 	return true;
 	}
 
+public void randomize()
+{
+	var rnd = new Random();
+	for(int i=0;i<this.size;i++) this[i] = rnd.NextDouble();
+}
+
 }//vector
+
