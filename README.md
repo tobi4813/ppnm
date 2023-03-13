@@ -1,5 +1,5 @@
 # Practical programming with numerical methods
 
 ## Homeworks:
-Linear equations: A and B
-\nEigenvalues: A
+Linear equations: A and B  
+Eigenvalues: A
