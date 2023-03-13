@@ -13,4 +13,4 @@ QRGS.dll : QRGS.cs
 	mcs -target:library -out:./$@ $^ -reference:linalg.dll
 
 clean :
-	*.exe *.dll Out*
+	rm *.exe *.dll Out*
