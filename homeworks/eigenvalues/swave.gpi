@@ -1,0 +1,16 @@
+set terminal svg background "white"
+set output "swave.svg"
+set multiplot layout 3,1
+
+set xlabel "delta-r"
+set ylabel "E_0"
+plot "fixedRmax.data"
+
+set xlabel "r_max"
+plot "fixedDr.data"
+
+set xlabel "r"
+set ylabel "f(r)
+set key autotitle columnheader
+stats "waveFunction.data" using 0 nooutput
+plot for [i=0:(STATS_blocks-1)] "waveFunction.data" using 1:2 index i

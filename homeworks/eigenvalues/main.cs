@@ -4,9 +4,89 @@ using static System.Math;
 
 public class main
 {
-	public static void Main()
+	public static void Main(string[] args)
 	{
-		int n = 5;
+		double rmax = 10, dr = 0.3;
+		bool rmaxFixed = false, drFixed = false, function = false, testEVD = false;
+		int testSize = 1, numberOfFunctions = 1;
+
+		foreach(var arg in args)
+		{
+			var words = arg.Split(":");
+			if (words[0] == "-rmax") rmax = double.Parse(words[1]);
+			else if (words[0] == "-dr") dr = double.Parse(words[1]);
+			else if (words[0] == "-fixed")
+			{
+				if (words[1] == "rmax") rmaxFixed = true;
+				else if (words[1] == "dr") drFixed = true;
+			}
+			else if (words[0] == "-test") {testEVD = true; testSize = int.Parse(words[1]);}
+			else if (words[0] == "-functions") {function = true; numberOfFunctions = int.Parse(words[1]);}
+		}
+
+		if(rmaxFixed)
+		{
+			double drMin = 0.1, drMax = rmax/2;
+			int resolution = 100;
+			for(int i=0;i<resolution+1;i++)
+			{
+				double newDr = drMin + (drMax-drMin)/resolution*i;
+				EVD burger = generateH(rmax, newDr);
+				WriteLine($"{newDr} {burger.eigenvalues[0]}");
+			}
+		}
+		else if (drFixed)
+		{
+			double rmaxMin = 0.1, rmaxMax = 10;
+			if (dr >= rmaxMin) rmaxMin = 2*dr;
+			int resolution = 100;			
+			for(int i=0;i<resolution+1;i++)
+			{
+				double newRmax = rmaxMin + (rmaxMax-rmaxMin)/resolution*i;
+				EVD burger = generateH(newRmax, dr);
+				WriteLine($"{newRmax} {burger.eigenvalues[0]}");
+			}
+		}
+		if(testEVD) TestEVD(testSize);
+		if(function)
+		{
+			EVD burger = generateH(rmax, dr);
+			int npoints = (int)(rmax/dr);
+			for(int i=0;i<numberOfFunctions;i++)
+			{
+				WriteLine($"{i}'th-eigenfunction");
+				for(int j=0;j<npoints;j++)
+				{
+					double dr_j = dr*(j+1); // r_j
+					double fr_j = burger.V[j, i]; // i'th eigenfunciton at r_j
+					WriteLine($"{dr_j} {fr_j}");
+				}
+				WriteLine(); // 2 empty lines seperates datasets
+				WriteLine();
+			}
+		}
+	}
+	public static EVD generateH(double rmax, double dr)
+	{
+		int npoints = (int)(rmax/dr);
+		vector r = new vector(npoints);
+		matrix H = new matrix(npoints,npoints);
+		for(int i=0;i<npoints;i++) r[i] = dr*(i+1);
+		for(int i=0;i<npoints-1;i++)
+		{
+			H[i,i] = -2;
+			H[i,i+1] = 1;
+			H[i+1,i] = 1;
+		}
+		H[npoints-1,npoints-1] = -2;
+		matrix.scale(H,-0.5/dr/dr);
+		for(int i=0;i<npoints;i++) H[i,i] -= 1/r[i];
+
+		return new EVD(H);
+	
+	}
+	public static void TestEVD(int n)
+	{
 		string divider = new string('-', n*11);
 		matrix A = new matrix(n,n);
 		A.randomizeSymmetric();
@@ -52,4 +132,5 @@ public class main
 		I.print("Product V * VT:");
 		WriteLine(divider);
 	}
+	
 }

@@ -2,4 +2,4 @@
 
 ## Homeworks:
 Linear equations: A and B  
-Eigenvalues: A
+Eigenvalues: A and most of B (plot graphics needs tweaking)

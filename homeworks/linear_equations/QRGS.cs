@@ -7,17 +7,23 @@ public class QRGS
 		m = A.size2;
 		Q = A.copy(); // Q = A, if we want to overwrite A as we make Q
 		R = new matrix(m,m);
+		QRDecomp(Q, R);
+	}
+	
+	public void QRDecomp(matrix Q, matrix R)
+	{
 		for(int i=0; i<m; i++)
 		{
 			R[i,i] = Q[i].norm();
 			Q[i] /= R[i,i];
 			for(int j=i+1; j<m; j++)
 			{
-				R[i,j] = Q[i].dot(A[j]);
+				R[i,j] = Q[i].dot(Q[j]);
 				Q[j] -= Q[i]*R[i,j];
 			}
-		}	
+		}
 	}
+	
 	public vector solve(vector b)
 	{
 		//b = Q.transpose()*b; // if we don't want to create vector c
