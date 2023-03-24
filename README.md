@@ -1,11 +1,11 @@
 # Practical programming with numerical methods
 
  ======================================
-| #  | homework      | A | B | C | Σ   | notes:
+| #  | homework      | A | B | C | Σ   | 
  ======================================
 | 1  | LinEq         | 6 | 3 | - |  9  |
 ---------------------------------------
-| 2  | EVD           | 6 | 3 | - |  9  | Need to multiply my eigenvectors by Sqrt(5) to have them match the analytical functions
+| 2  | EVD           | 6 | 3 | - |  9  | 
 ---------------------------------------
 | 3  | LeastSquares  | - | - | - |  0  |
 ---------------------------------------
