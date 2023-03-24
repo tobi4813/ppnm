@@ -1,16 +1,34 @@
-set terminal svg background "white"
+set terminal svg background "white" size 1000,2000
 set output "swave.svg"
 set multiplot layout 3,1
+set size ratio 1/1.5
+set lmargin 10
+set rmargin 3
 
-set xlabel "delta-r"
-set ylabel "E_0"
-plot "fixedRmax.data"
+keysize = "14"
+labelsize = "17"
+ticksize = "12"
+point_size = "0.5"
 
-set xlabel "r_max"
-plot "fixedDr.data"
+set xlabel "{/Symbol D}r" font ",".labelsize
+set ylabel "{/Symbol e}_0" font ",".labelsize
+set tics font ",".ticksize
+
+set key autotitle columnhead right bottom font ",".keysize
+plot "fixedRmax.data" with points pointtype 7 pointsize point_size
+
+set xlabel "r_{max}"
+set key autotitle columnhead right top
+plot "fixedDr.data" with points pointtype 7 pointsize point_size
+
+numericalStyle = "points pointtype 6 pointsize ".point_size
+analyticalstyle = "lines linewidth 3"
+bruh = "with lines"
 
 set xlabel "r"
 set ylabel "f(r)
-set key autotitle columnheader
+set key autotitle columnheader horizontal outside below
 stats "waveFunction.data" using 0 nooutput
-plot for [i=0:(STATS_blocks-1)] "waveFunction.data" using 1:2 index i
+plot for [i=0:(STATS_blocks-1)/2] "waveFunction.data" using 1:2 index 2*i with points pointtype 7 pointsize 0.8 \
+	, for [i=0:(STATS_blocks-1)/2] "waveFunction.data" using 1:2 index 2*i+1 with lines linewidth 2 linecolor rgb "black" 
+# STATS_blocks-1 = number of datasets minus 1. 1:2 means 1st column = x axis

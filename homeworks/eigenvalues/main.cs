@@ -28,6 +28,8 @@ public class main
 		{
 			double drMin = 0.1, drMax = rmax/2;
 			int resolution = 100;
+			string title = "fixed R_{max}";
+			WriteLine($"\"{title} = {rmax}\"");
 			for(int i=0;i<resolution+1;i++)
 			{
 				double newDr = drMin + (drMax-drMin)/resolution*i;
@@ -37,9 +39,11 @@ public class main
 		}
 		else if (drFixed)
 		{
-			double rmaxMin = 0.1, rmaxMax = 10;
+			double rmaxMin = 0.1, rmaxMax = 5;
 			if (dr >= rmaxMin) rmaxMin = 2*dr;
-			int resolution = 100;			
+			int resolution = 100;
+			string title = "fixed {/Symbol D}r"; //fixed \Delta r in gnuplot
+			WriteLine($"\"{title} = {dr}\"");
 			for(int i=0;i<resolution+1;i++)
 			{
 				double newRmax = rmaxMin + (rmaxMax-rmaxMin)/resolution*i;
@@ -54,16 +58,34 @@ public class main
 			int npoints = (int)(rmax/dr);
 			for(int i=0;i<numberOfFunctions;i++)
 			{
-				WriteLine($"{i}'th-eigenfunction");
+				WriteLine($"\"{i}'th-eigenfunction (numerical)\"");
 				for(int j=0;j<npoints;j++)
 				{
-					double dr_j = dr*(j+1); // r_j
-					double fr_j = burger.V[j, i]; // i'th eigenfunciton at r_j
-					WriteLine($"{dr_j} {fr_j}");
+					double r_j = dr*(j+1); // r_j
+					double fr_j = burger.V[j, i]*burger.V[j, i]; // i'th eigenfunciton at r_j
+					WriteLine($"{r_j} {fr_j}");
 				}
-				WriteLine(); // 2 empty lines seperates datasets
-				WriteLine();
+				Write("\n\n"); // 2 empty lines seperates datasets in gnuplot
+
+				WriteLine($"\"{i}'th-eigenfunction (analytical)\"");
+				int analyticalResolution = 1000;
+				for(int j=0;j<analyticalResolution;j++)
+				{
+					double r = rmax/analyticalResolution*j;
+					WriteLine($"{r} {f(r, i+1)/5}");
+				}	
+				if(i < numberOfFunctions-1) Write("\n\n");	
 			}
+		}
+	}
+	public static double f(double r, int n)
+	{	
+		switch(n)
+		{
+			case 1: return Pow(r*2*Exp(-r),(double)2); // r*R_10
+			case 2: return Pow(r/Sqrt(2)*(1-r/2)*Exp(-r/2),(double)2); // r*R_20
+			case 3: return Pow(r*2/(3*Sqrt(3))*(1-2*r/3 + 2*r*r/27)*Exp(-r/3),(double)2); // r*R_30
+			default: return -1;
 		}
 	}
 	public static EVD generateH(double rmax, double dr)

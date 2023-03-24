@@ -15,14 +15,14 @@ linalg.dll : $(DIR)/matrix.cs $(DIR)/vector.cs #$(DIR)/randomMatrix.cs
 EVD.dll : EVD.cs
 	mcs -target:library -out:./$@ $^ -reference:linalg.dll
 
-fixedRmax.data : main.exe
-	mono $< -rmax:30 -fixed:rmax > $@
+fixedRmax.data : main.exe Makefile
+	mono $< -rmax:50 -fixed:rmax > $@
 
-fixedDr.data : main.exe
-	mono $< -dr:0.3 -fixed:dr > $@
+fixedDr.data : main.exe Makefile
+	mono $< -dr:0.1 -fixed:dr > $@
 
 waveFunction.data : main.exe Makefile
-	mono $< -rmax:10 -dr:0.2 -functions:2 > $@
+	mono $< -rmax:30 -dr:0.2 -functions:3 > $@
 
 clean :
 	rm *.exe *.dll Out* *.data *.svg
