@@ -62,7 +62,7 @@ public class main
 				for(int j=0;j<npoints;j++)
 				{
 					double r_j = dr*(j+1); // r_j
-					double fr_j = burger.V[j, i]*burger.V[j, i]; // i'th eigenfunciton at r_j
+					double fr_j = burger.V[j, i]*burger.V[j, i]*5; // i'th eigenfunciton at r_j
 					WriteLine($"{r_j} {fr_j}");
 				}
 				Write("\n\n"); // 2 empty lines seperates datasets in gnuplot
@@ -72,7 +72,7 @@ public class main
 				for(int j=0;j<analyticalResolution;j++)
 				{
 					double r = rmax/analyticalResolution*j;
-					WriteLine($"{r} {f(r, i+1)/5}");
+					WriteLine($"{r} {f(r, i+1)}");
 				}	
 				if(i < numberOfFunctions-1) Write("\n\n");	
 			}

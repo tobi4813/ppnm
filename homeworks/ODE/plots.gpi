@@ -1,0 +1,15 @@
+set terminal svg background "white"
+set output "Plot_1st_order.svg"
+
+set key autotitle columnheader font ",18"
+plot "y'=y.data" index 1 with lines linewidth 7 linecolor rgb "black"\
+	,"y'=y.data" index 0 with lines linewidth 2 linecolor rgb "green"
+
+set output "Plot_2nd_order.svg"
+plot "y''=-y.data" index 1 with lines linewidth 7 linecolor rgb "black"\
+	,"y''=-y.data" index 0 with lines linewidth 2 linecolor rgb "green"
+
+set output "Plot_pendulum.svg"
+plot "pendulum.data" using 1:2 with lines linewidth 4\
+	,"pendulum.data" using 1:3 with lines linewidth 4
+

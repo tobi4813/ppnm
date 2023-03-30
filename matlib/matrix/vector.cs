@@ -31,8 +31,8 @@ public vector(string s){
         int n = words.Length;
         data = new double[n];
         for(int i=0;i<size;i++){
-                        this[i]=double.Parse(words[i]);
-                        }
+            this[i]=double.Parse(words[i]);
+            }
 	}
 
 
