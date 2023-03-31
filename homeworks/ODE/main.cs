@@ -3,15 +3,17 @@ using System.IO;
 using static System.Console;
 using static solveODE;
 using static System.Math;
+using System.Collections.Generic;
 
 public class main
 {
-	public static double[] masses = {2e30, 6e24};
-	public static double G = 6.67e-11;
+	static List<double> masses;
+	static double G;
 	
 	public static void Main()
 	{
 		Tests();
+		Eight();
 		PlanetaryMotion();
 	}
 	static void Tests()
@@ -60,21 +62,36 @@ public class main
 	}
 	
 	static vector Pendulum(double x, vector y)
-	{
-		//theta'' + b*theta' + c*sin(theta) = 0
+	{	//theta'' + b*theta' + c*sin(theta) = 0
 		double theta = y[0], thetaP = y[1];
 		double b = 0.25, c = 5;
 		double thetaPP = -b*thetaP - c*Sin(theta);
 		return new vector(thetaP, thetaPP);
 	}
+
+	static void Eight()
+	{	//y0 = x1_0 y1_0 x1'_0 y1' x2_0 y2_0 x2'_0 ... xi_0 yi_0
+		masses = new List<double>() {1,1,1};
+		G = 1;
+		genlist<double> xs;
+		genlist<vector> ys;
+		double x1=0.97000436, y1=-0.24308753,x2=-x1, y2=-y1, x3=0, y3=0;
+		double vx3=-0.93240737, vy3=-0.86473146, vx1=-vx3/2, vy1=-vy3/2, vx2=vx1, vy2=vy1;
+		vector y0 = new vector($"{x1} {y1} {vx1} {vy1} {x2} {y2} {vx2} {vy2} {x3} {y3} {vx3} {vy3}");
+
+		(xs,ys) = drive(Gravitation, 0, y0, 6.32591398, acc: 1e-8, eps: 1e-9);
+		WriteData(xs, ys, "t x1 m_1 vx1 vy1 x2 m_2 vx2 vy2 x3 m_3 vx3 vy3", "eight.data");
+	}
 	
 	static void PlanetaryMotion()
 	{
+		masses = new List<double>(){2e30, 6e24};
+		G = 6.67e-11;
 		genlist<double> xs;
 		genlist<vector> ys;
-		//y0 = x1_0 y1_0 x1'_0 y1' x2_0 y2_0 x2'_0 ... xi_0 yi_0
 		double sunX=0, sunY=0, sunVX=0, sunVY=0, earthX=149577000000, earthY=0, earthVX=0, earthVY=29780; //[r] = m, [v] = m/s 
 		vector y0 = new vector($"{sunX} {sunY} {sunVX} {sunVY} {earthX} {earthY} {earthVX} {earthVY}");
+
 		(xs,ys) = drive(Gravitation, x0: 0, y0: y0, xf: 3.3e7, h: 1e-2, acc: 1e-8, eps: 3e-9); //eps=3e-9 pretty accurate ~10 seconds run time
 		WriteData(xdata: xs, ydata: ys, name: "time sunx Sun sunvx sunvy earthx Earth earthvx earthvy", outfile: "planetHighAcc.data");
 

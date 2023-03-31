@@ -6,9 +6,11 @@ DLLS = $(addprefix -reference:,$(filter %.dll,$^))
 CODE = $(filter %.cs,$^)
 MKLIB = mcs -target:library -out:$@ $(DLLS) $(CODE)
 
+$(info Making the data may take up to ~30s depending on hardware)
+
 plots.svg : plots.gpi out.txt main.cs
 	gnuplot $<
-	
+
 out.txt : main.exe # Only used for debugging
 	mono main.exe > out.txt
 

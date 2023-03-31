@@ -13,10 +13,16 @@ set output "Plot_pendulum.svg"
 plot "pendulum.data" using 1:2 with lines linewidth 4\
 	,"pendulum.data" using 1:3 with lines linewidth 4
 
+set output "Eight.svg"
+plot "eight.data" using 2:3 with lines\
+	,"eight.data" using 6:7 with lines\
+	,"eight.data" using 10:11 with lines
+
+
 set terminal svg background "white" size 600,1200
 set size ratio -1
 set key outside right
-set output "Planet.svg"
+set output "planet.svg"
 set multiplot layout 3,1
 set xrange [-2.2e11:2.2e11]
 set yrange [-2.2e11:2.2e11]
