@@ -1,0 +1,18 @@
+Results below (accuracy of 0.001 fulfilled)
+
+Integral of 1/sqrt(x) from 0 to 1:
+ Numerical: 1.99996150007805
+     Exact: 2
+
+Integral of 4*sqrt(1-x²) from 0 to 1:
+ Numerical: 3.14183457802727
+     Exact: 3.14159265358979
+
+Integral of ln(x)/sqrt(x) from 0 to 1:
+ Numerical: -3.99991705899915
+     Exact: -4
+
+erf(1) = 0.842729958487199
+Expected: 0.84270079 (from WolframAlpha)
+erf(2) = 0.994900318508938
+Expected: 0.99532227 (from WolframAlpha)
