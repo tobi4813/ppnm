@@ -16,8 +16,17 @@ public static class main
 		vector reducedDy = new vector(dy.size);
 		for(int i=0;i<activity.size;i++){reducedActivity[i] = Log(activity[i]); reducedDy[i] = dy[i]/activity[i];}
 	
-		vector parameters = Fit.lsfit(fs,time,reducedActivity,reducedDy);
+		(vector parameters, matrix covariance) = Fit.lsfit(fs,time,reducedActivity,reducedDy);
+		covariance.print("Covariance matrix:");
+		double a = parameters[0], lambda = parameters[1];
+		double aError = Sqrt(covariance[0,0]), lambdaError = Sqrt(covariance[1,1]);
 
+		WriteLine("Coefficients:");
+		WriteLine($"a = {Round(a,4)}±{Round(aError,4)}");
+		WriteLine($"λ = {Round(lambda,4)}±{Round(lambdaError,4)}0 days⁻¹");
+		WriteLine($"T½ = {Round(Log(2)/lambda,4)}00±{Round(Log(2)*lambdaError/Pow(lambda,2),4)} days"); //dT½ = ln(2) d(Lambda) /lambda^2
+
+		
 		using (StreamWriter output = new StreamWriter("decayData.data", append: false))
 		{	
 			output.WriteLine("\"Experimental data\"");
@@ -25,7 +34,7 @@ public static class main
 		}
 		using (StreamWriter output = new StreamWriter("decayFit.data", append: false))
 		{
-			output.WriteLine($"\"Least squares fit, T_{{1/2}} = {Round(Log(2)/parameters[1],2)}d\"");
+			output.WriteLine($"\"Least squares fit, T_{{1/2}} = {Round(Log(2)/parameters[1],4)}d\"");
 			int resolution = 100;
 			for(int i=0;i<resolution+1;i++)
 			{

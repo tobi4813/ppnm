@@ -23,4 +23,4 @@ fit.dll : fit.cs linalg.dll QRGS.dll
 	$(MKLIB)
 
 clean :
-	rm *.exe *.dll Out* *.svg
+	rm *.exe *.dll Out* *.svg *.data

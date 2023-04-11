@@ -1,7 +1,7 @@
 set terminal svg background "white"
 set output "Decay.svg"
 
-set title "Halflife of ^{224}Ra is 3.6319d (source: wikipedia)" font ",18" 
+set title "Halflife of ^{224}Ra is 3.6319d (source: wikipedia)\n See Out.txt for details on fit parameters" font ",18"
 
 set xlabel "Time (days)" font ",17"
 set ylabel "Activity (Arb. units)" font ",17"

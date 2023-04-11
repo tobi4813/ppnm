@@ -2,7 +2,7 @@ using System;
 
 public static class Fit
 {
-	public static vector lsfit(Func<double,double>[] fs, vector x, vector y, vector dy)
+	public static (vector,matrix) lsfit(Func<double,double>[] fs, vector x, vector y, vector dy)
 	{
 		int n = x.size, m = fs.Length;
 		matrix A = new matrix(n,m);
@@ -18,6 +18,8 @@ public static class Fit
 		}
 		QRGS QRfact = new QRGS(A);
 		vector c = QRfact.solve(b);
-		return c;
+		QRGS ATA = new QRGS(A.transpose()*A);
+		matrix covariance = ATA.inverse();
+		return (c,covariance);
 	}
 }
