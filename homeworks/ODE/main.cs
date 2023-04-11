@@ -12,8 +12,8 @@ public class main
 	
 	public static void Main()
 	{
-		Tests();
-		Eight();
+		//Tests();
+		//Eight();
 		PlanetaryMotion();
 	}
 	static void Tests()
@@ -29,8 +29,14 @@ public class main
 		
 		(xs,ys) = drive(Pendulum, x0: 0, y0: new vector($"{PI-0.1} 0"), xf: 10, h: 5e-1, acc: 1e-8, eps: 1e-8); //y0 = [y0, y'0]
 		WriteData(xs, ys, "t \"{/Symbol q}(t)\" \"{/Symbol w}(t)\"",outfile: "pendulum.data");
-	
-	}
+
+		genlist<double> xlist = new genlist<double>();
+		genlist<vector> ylist = new genlist<vector>();
+		vector y = driver(SecondOrder, x0: 0, y0: new vector("1 0"), xf: 3*PI, h: 1e-2, acc: 1e-8, eps: 1e-9); //
+		WriteLine($"Solving u'' = -u while not keeping intermediate points: size of xlist={xlist.size}, size of ylist={ylist.size}, final point={y[0]}=cos(3*pi)={Cos(3*PI)}");
+		driver(SecondOrder, x0: 0, y0: new vector("1 0"), xf: 3*PI, h: 1e-2, acc: 1e-8, eps: 1e-9, xlist: xlist, ylist: ylist); //
+		WriteLine($"After feeding the driver empty lists: size of xlist={xlist.size}, size of ylist={ylist.size}");
+	}	
 	
 	static void WriteData(genlist<double> xdata, genlist<vector> ydata, string name, string outfile, Func<double,double> analytical=null)
 	{

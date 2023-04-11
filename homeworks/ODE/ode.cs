@@ -3,6 +3,7 @@ using static System.Math;
 
 public static class solveODE
 {	
+	//public static SolveODE( if xlist!=null, method etc etc.
 	static (vector, vector) rkstep12(Func<double,vector,vector> f, double x, vector y, double h)
 	{
 		vector k0 = f(x,y);
@@ -40,8 +41,19 @@ public static class solveODE
 		vector er = h*k - h*kStar;
 		return (yh, er);
 	}
+	public static (vector, vector) step(Func<double,vector,vector> f, double x, vector y, double h, string stepper="rkf45")
+	{
+		switch(stepper)
+		{
+			case "rk12":
+				return rkstep12(f,x,y,h);
+			default:
+				return rkstep45(f,x,y,h);
+		}
+	}
+	
 	public static (genlist<double>, genlist<vector>) drive(Func<double,vector,vector> f,double x0,vector y0,double xf,double h=0.01,
-																double acc=1e-2,double eps=1e-2) //xf = xfinal, y0 = y values at x[0]
+																double acc=1e-8,double eps=1e-8) //xf = xfinal, y0 = y values at x[0]
 	{
 		if(x0 > xf) throw new ArgumentException("driver: x0>xf");
 		double x = x0;
@@ -64,6 +76,36 @@ public static class solveODE
 			}
 			h *= Min(Pow(tol/err, 0.25)*0.95, 2);
 		}while(true);
+	}
+
+	public static vector driver(Func<double,vector,vector> f,double x0,vector y0,double xf,double h=1e-2,double acc=1e-8,
+								double eps=1e-8,genlist<double> xlist=null,genlist<vector> ylist=null)
+	{
+		if(x0 > xf) throw new ArgumentException("driver: x0>xf");
+		double x = x0;
+		vector y = y0.copy();
+		if(xlist!=null) xlist.add(x);
+		if(ylist!=null) ylist.add(y);
+		do
+		{
+			if(x >= xf) return y;
+			if(x+h > xf) h = xf-x; // reduces h to not overshoot xf
+			(vector yh,vector erv) = rkstep45(f,x,y,h);
+		//	double[] tol = new double[y.size];
+		//	for(int i=0;i<y.size;i++)
+		//		tol[i] = Max(acc, Abs(y0
+			double tol = Max(acc, yh.norm()*eps) * Sqrt(h/(xf-x0));
+			double err = erv.norm();
+			if(err <= tol)
+			{
+				x+=h;
+				y=yh;
+				if(xlist!=null) xlist.add(x);
+				if(ylist!=null) ylist.add(y);
+			}
+			h *= Min(Pow(tol/err, 0.25)*0.95, 2);
+		}while(true);
+	
 	}
 }
 

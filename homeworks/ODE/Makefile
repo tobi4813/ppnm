@@ -8,11 +8,11 @@ MKLIB = mcs -target:library -out:$@ $(DLLS) $(CODE)
 
 $(info Making the data may take up to ~30s depending on hardware)
 
-plots.svg : plots.gpi out.txt main.cs
+plots.svg : plots.gpi Out.txt main.cs
 	gnuplot $<
 
-out.txt : main.exe # Only used for debugging
-	mono main.exe > out.txt
+Out.txt : main.exe
+	mono main.exe > Out.txt
 
 main.exe : main.cs linalg.dll genlist.dll ode.dll
 	mcs $(CODE) $(DLLS)
@@ -27,4 +27,4 @@ ode.dll : ode.cs linalg.dll genlist.dll
 	$(MKLIB)
 
 clean :
-	rm *.exe *.dll out* *.svg *.data
+	rm *.exe *.dll Out* *.svg *.data

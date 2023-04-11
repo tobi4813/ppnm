@@ -1,0 +1,13 @@
+set terminal svg background "white"
+set output "Decay.svg"
+
+set title "Halflife of ^{224}Ra is 3.6319d (source: wikipedia)" font ",18" 
+
+set xlabel "Time (days)" font ",17"
+set ylabel "Activity (Arb. units)" font ",17"
+
+set key autotitle columnheader font ",15"
+
+
+plot "decayData.data" with yerrorbars pt 7 lc rgb "black"\
+	,"decayFit.data" with lines dashtype 4 lw 2 lc rgb "#3f3f3f"
