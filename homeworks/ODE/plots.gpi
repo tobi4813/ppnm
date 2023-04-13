@@ -1,40 +1,42 @@
-set terminal svg background "white"
-set output "Plot_1st_order.svg"
+system "mkdir -p Plots" #-p make if Plots dont exist
 
 # test of differential equations
+set terminal svg background "white"
+set output "Plots/Plot_1st_order.svg"
+
 set yrange [-1.3:1.3]
 set key autotitle columnheader font ",18" outside center bottom
-plot "y'=y.data" index 1 with lines linewidth 7 linecolor rgb "black"\
-	,"y'=y.data" index 0 with lines linewidth 2 linecolor rgb "green"
+plot "data/y'=y.data" index 1 with lines linewidth 7 linecolor rgb "black"\
+	,"data/y'=y.data" index 0 with lines linewidth 2 linecolor rgb "green"
 
-set output "Plot_2nd_order.svg"
-plot "y''=-y.data" index 1 with lines linewidth 7 linecolor rgb "black"\
-	,"y''=-y.data" index 0 with lines linewidth 2 linecolor rgb "green"
+set output "Plots/Plot_2nd_order.svg"
+plot "data/y''=-y.data" index 1 with lines linewidth 7 linecolor rgb "black"\
+	,"data/y''=-y.data" index 0 with lines linewidth 2 linecolor rgb "green"
 
-set output "B) Plot_2nd_order.svg"
+set output "Plots/B) Plot_2nd_order.svg"
 set title "y'' = -y with driver improvements" font ",24"
-plot "B y''=-y.data" index 1 with lines linewidth 7 linecolor rgb "black"\
-	,"B y''=-y.data" index 0 with lines linewidth 2 linecolor rgb "green"
+plot "data/B y''=-y.data" index 1 with lines linewidth 7 linecolor rgb "black"\
+	,"data/B y''=-y.data" index 0 with lines linewidth 2 linecolor rgb "green"
 
 
 # pendulum
 set title ""
-set output "Plot_pendulum.svg" 
-plot "pendulum.data" using 1:2 with lines linewidth 4\
-	,"pendulum.data" using 1:3 with lines linewidth 4
+set output "Plots/Plot_pendulum.svg" 
+plot "data/pendulum.data" using 1:2 with lines linewidth 4\
+	,"data/pendulum.data" using 1:3 with lines linewidth 4
 
 # eight
-set output "Eight.svg"
-plot "eight.data" using 2:3 with lines\
-	,"eight.data" using 6:7 with lines\
-	,"eight.data" using 10:11 with lines
+set output "Plots/Eight.svg"
+plot "data/eight.data" using 2:3 with lines\
+	,"data/eight.data" using 6:7 with lines\
+	,"data/eight.data" using 10:11 with lines
 
 # relativistic planetary motion
 set terminal svg background "white" size 800,2000
 set size ratio -1
 set key outside right
 
-set output "GR_planets.svg"
+set output "Plots/GR_planets.svg"
 
 set multiplot layout 4,1
 
@@ -43,36 +45,36 @@ unset yrange
 set title "u(0) = 1, u'(0) = 0, {/symbol e} = 0, 1 revolution \n\
 	since u is constant (circular motion) the stepsize keeps increasing.\n\
 	Implementing a maxStepSize could fix this" font ",18"
-plot "GRi.data" using (1/$2)*cos($1):(1/$2)*sin($1) with lines
+plot "data/GRi.data" using (1/$2)*cos($1):(1/$2)*sin($1) with lines
 
 set title "u(0) = 1, u'(0) = -0.5, {/symbol e} = 0, 1 revolution"
-plot "GRii.data" using (1/$2)*cos($1):(1/$2)*sin($1) with lines
+plot "data/GRii.data" using (1/$2)*cos($1):(1/$2)*sin($1) with lines
 
 set title "u(0) = 1, u'(0) = -0.5, {/symbol e} = 0.01, 4 revolutions"
-plot "GRiii.data" using (1/$2)*cos($1):(1/$2)*sin($1) with lines
+plot "data/GRiii.data" using (1/$2)*cos($1):(1/$2)*sin($1) with lines
 
 set title "Donut mandala \n\
 	u(0) = 1, u'(0) = -0.5, {/symbol e} = 0.01, 99 revolutions \n\
 	at reduced accuracy to increase computation time"
-plot "donut.data" using (1/$2)*cos($1):(1/$2)*sin($1) with lines
+plot "data/donut.data" using (1/$2)*cos($1):(1/$2)*sin($1) with lines
 
 
 # Newtonian planetary motion
 unset multiplot # cannot change output in multiplot mode
-set output "newtonian_planet.svg"
+set output "Plots/newtonian_planet.svg"
 set multiplot layout 3,1
 
 set xrange [-2.2e11:2.2e11]
 set yrange [-2.2e11:2.2e11]
 
 set title "Earth around sun simulation in 0.95 year" font ",18"
-plot "planetHighAcc.data" using 6:7 every ::::104 with lines\
-	,"planetHighAcc.data" using 2:3 every ::::1 with points pt 3 pointsize 2 linecolor rgb "orange"	
+plot "data/planetHighAcc.data" using 6:7 every ::::104 with lines\
+	,"data/planetHighAcc.data" using 2:3 every ::::1 with points pt 3 pointsize 2 linecolor rgb "orange"	
 
 set title "Earth around sun simulation in 1 year" font ",18"
-plot "planetHighAcc.data" using 6:7 with lines\
-	,"planetHighAcc.data" using 2:3 every ::::1 with points pt 3 pointsize 2 linecolor rgb "orange"	
+plot "data/planetHighAcc.data" using 6:7 with lines\
+	,"data/planetHighAcc.data" using 2:3 every ::::1 with points pt 3 pointsize 2 linecolor rgb "orange"	
 
 set title "Mandala" 
-plot "planetLowAcc.data" using 6:7 with lines\
-	,"planetLowAcc.data" using 2:3 every ::::1 with points pt 3 pointsize 2 linecolor rgb "orange"	
+plot "data/planetLowAcc.data" using 6:7 with lines\
+	,"data/planetLowAcc.data" using 2:3 every ::::1 with points pt 3 pointsize 2 linecolor rgb "orange"	

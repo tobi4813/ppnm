@@ -29,4 +29,5 @@ ode.dll : ode.cs linalg.dll genlist.dll
 	$(MKLIB)
 
 clean :
-	rm *.exe *.dll Out* *.svg *.data
+	rm *.exe *.dll Out* *.svg \
+	rm -rfv data Plots

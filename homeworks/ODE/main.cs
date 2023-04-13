@@ -42,7 +42,8 @@ public class main
 	
 	static void WriteData(genlist<double> xdata, genlist<vector> ydata, string name, string outfile, Func<double,double> analytical=null)
 	{
-		using (StreamWriter output = new StreamWriter(outfile, append: false))
+		Directory.CreateDirectory("data");
+		using (StreamWriter output = new StreamWriter($"data/{outfile}", append: false))
 		{
 			output.WriteLine(name); // numerical-data header
 			for(int i=0;i<xdata.size;i++) 
