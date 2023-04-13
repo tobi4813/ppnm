@@ -1,0 +1,2 @@
+Solving u'' = -u while only keeping final point: size of xlist=0, size of ylist=0, final point=-0.999999987878565=cos(3*pi)=-1
+After feeding the driver empty lists: size of xlist=128, size of ylist=128
