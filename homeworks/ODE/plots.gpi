@@ -1,7 +1,9 @@
 set terminal svg background "white"
 set output "Plot_1st_order.svg"
 
-set key autotitle columnheader font ",18"
+# test of differential equations
+set yrange [-1.3:1.3]
+set key autotitle columnheader font ",18" outside center bottom
 plot "y'=y.data" index 1 with lines linewidth 7 linecolor rgb "black"\
 	,"y'=y.data" index 0 with lines linewidth 2 linecolor rgb "green"
 
@@ -9,21 +11,57 @@ set output "Plot_2nd_order.svg"
 plot "y''=-y.data" index 1 with lines linewidth 7 linecolor rgb "black"\
 	,"y''=-y.data" index 0 with lines linewidth 2 linecolor rgb "green"
 
-set output "Plot_pendulum.svg"
+set output "B) Plot_2nd_order.svg"
+set title "y'' = -y with driver improvements" font ",24"
+plot "B y''=-y.data" index 1 with lines linewidth 7 linecolor rgb "black"\
+	,"B y''=-y.data" index 0 with lines linewidth 2 linecolor rgb "green"
+
+
+# pendulum
+set title ""
+set output "Plot_pendulum.svg" 
 plot "pendulum.data" using 1:2 with lines linewidth 4\
 	,"pendulum.data" using 1:3 with lines linewidth 4
 
+# eight
 set output "Eight.svg"
 plot "eight.data" using 2:3 with lines\
 	,"eight.data" using 6:7 with lines\
 	,"eight.data" using 10:11 with lines
 
-
-set terminal svg background "white" size 600,1200
+# relativistic planetary motion
+set terminal svg background "white" size 800,2000
 set size ratio -1
 set key outside right
-set output "planet.svg"
+
+set output "GR_planets.svg"
+
+set multiplot layout 4,1
+
+unset xrange
+unset yrange
+set title "u(0) = 1, u'(0) = 0, {/symbol e} = 0, 1 revolution \n\
+	since u is constant (circular motion) the stepsize keeps increasing.\n\
+	Implementing a maxStepSize could fix this" font ",18"
+plot "GRi.data" using (1/$2)*cos($1):(1/$2)*sin($1) with lines
+
+set title "u(0) = 1, u'(0) = -0.5, {/symbol e} = 0, 1 revolution"
+plot "GRii.data" using (1/$2)*cos($1):(1/$2)*sin($1) with lines
+
+set title "u(0) = 1, u'(0) = -0.5, {/symbol e} = 0.01, 4 revolutions"
+plot "GRiii.data" using (1/$2)*cos($1):(1/$2)*sin($1) with lines
+
+set title "Donut mandala \n\
+	u(0) = 1, u'(0) = -0.5, {/symbol e} = 0.01, 99 revolutions \n\
+	at reduced accuracy to increase computation time"
+plot "donut.data" using (1/$2)*cos($1):(1/$2)*sin($1) with lines
+
+
+# Newtonian planetary motion
+unset multiplot # cannot change output in multiplot mode
+set output "newtonian_planet.svg"
 set multiplot layout 3,1
+
 set xrange [-2.2e11:2.2e11]
 set yrange [-2.2e11:2.2e11]
 

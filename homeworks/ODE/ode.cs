@@ -47,14 +47,13 @@ public static class solveODE
 		return (yh, er);
 	}
 	public static (genlist<double>, genlist<vector>) drive(Func<double,vector,vector> f,double x0,vector y0,double xf,double h=0.01,
-																double acc=1e-8,double eps=1e-8,string method="rkf45") //xf = xfinal, y0 = y values at x[0]
+																double acc=1e-3,double eps=1e-3,string method="rkf45") //xf = xfinal, y0 = y values at x[0]
 	{
 		if(x0 > xf) throw new ArgumentException("driver: x0>xf");
 		double x = x0;
 		vector y = y0.copy();
 		matrix a;
 		vector b, bStar, c;
-
 		switch(method)
 		{
 			case "rk12":
@@ -81,38 +80,50 @@ public static class solveODE
 				ylist.add(y);
 			}
 			h *= Min(Pow(tol/err, 0.25)*0.95, 2);
-		}while(true);// && i < 5);
-	//	return(xlist,ylist);
+		}while(true);
 	}
 
-	/*public static vector driver(Func<double,vector,vector> f,double x0,vector y0,double xf,double h=1e-2,double acc=1e-8,
-								double eps=1e-8,genlist<double> xlist=null,genlist<vector> ylist=null)
+	public static vector driver(Func<double,vector,vector> f,double x0,vector y0,double xf,double h=1e-2,double acc=1e-3,
+								double eps=1e-3,genlist<double> xlist=null,genlist<vector> ylist=null,string method = "rkf45")
 	{
 		if(x0 > xf) throw new ArgumentException("driver: x0>xf");
 		double x = x0;
 		vector y = y0.copy();
+		matrix a;
+		vector b, bStar, c;
+		switch(method)
+		{
+			case "rk12":
+				(a,b,bStar,c) = midpointEulerTable();
+				break;
+			default:
+				(a,b,bStar,c) = rkf45Table();
+				break;
+		}
 		if(xlist!=null) xlist.add(x);
 		if(ylist!=null) ylist.add(y);
 		do
 		{
 			if(x >= xf) return y;
 			if(x+h > xf) h = xf-x; // reduces h to not overshoot xf
-			(vector yh,vector erv) = rkstep45(f,x,y,h);
-		//	double[] tol = new double[y.size];
-		//	for(int i=0;i<y.size;i++)
-		//		tol[i] = Max(acc, Abs(y0
-			double tol = Max(acc, yh.norm()*eps) * Sqrt(h/(xf-x0));
-			double err = erv.norm();
-			if(err <= tol)
+			(vector yh,vector erv) = rkstep45(a,b,bStar,c,f,x,y,h);
+			bool ok = true;
+			double[] tol = new double[y.size];
+			for(int i=0;i<y.size;i++)
+			{
+				tol[i] = Max(acc, eps*Abs(y0[i]))*Sqrt(h/(xf-x0));
+				if(!(erv[i]<tol[i])) ok = false;
+			}
+			if(ok)
 			{
 				x+=h;
 				y=yh;
 				if(xlist!=null) xlist.add(x);
 				if(ylist!=null) ylist.add(y);
 			}
-			h *= Min(Pow(tol/err, 0.25)*0.95, 2);
+			double factor = tol[0]/Abs(erv[0]);
+			for(int i=0;i<y.size;i++) factor = Min(factor, tol[i]/Abs(erv[i]));
+			h *= Min(Pow(factor, 0.25)*0.95, 2);
 		}while(true);
-	
-	}*/
+	}
 }
-

@@ -9,6 +9,7 @@ public class main
 {
 	static List<double> masses;
 	static double G;
+	static double eps;
 	
 	public static void Main()
 	{
@@ -30,17 +31,18 @@ public class main
 		(xs,ys) = drive(Pendulum, x0: 0, y0: new vector($"{PI-0.1} 0"), xf: 10, h: 5e-1, acc: 1e-7, eps: 1e-7); //y0 = [y0, y'0]
 		WriteData(xs, ys, "t \"{/Symbol q}(t)\" \"{/Symbol w}(t)\"",outfile: "pendulum.data");
 
-		//genlist<double> xlist = new genlist<double>();
-		//genlist<vector> ylist = new genlist<vector>();
-		//vector y = driver(SecondOrder, x0: 0, y0: new vector("1 0"), xf: 3*PI, h: 1e-2, acc: 1e-8, eps: 1e-9); //
-		//WriteLine($"Solving u'' = -u while not keeping intermediate points: size of xlist={xlist.size}, size of ylist={ylist.size}, final point={y[0]}=cos(3*pi)={Cos(3*PI)}");
-		//driver(SecondOrder, x0: 0, y0: new vector("1 0"), xf: 3*PI, h: 1e-2, acc: 1e-8, eps: 1e-9, xlist: xlist, ylist: ylist); //
-		//WriteLine($"After feeding the driver empty lists: size of xlist={xlist.size}, size of ylist={ylist.size}");
+		genlist<double> xlist = new genlist<double>();
+		genlist<vector> ylist = new genlist<vector>();
+		vector y = driver(SecondOrder, x0: 0, y0: new vector("1 0"), xf: 3*PI, h: 1e-2, acc: 1e-7, eps: 1e-7); //
+		WriteLine($"Solving u'' = -u while only keeping final point: size of xlist={xlist.size}, size of ylist={ylist.size}, final point={y[0]}=cos(3*pi)={Cos(3*PI)}");
+		driver(SecondOrder, x0: 0, y0: new vector("0 1"), xf: 3*PI, h: 1e-2, acc: 1e-7, eps: 1e-7, xlist: xlist, ylist: ylist); //
+		WriteLine($"After feeding the driver empty lists: size of xlist={xlist.size}, size of ylist={ylist.size}");
+		WriteData(xlist,ylist,"\"numerical, y'' = -y. y0 = 0, y'0 = 0 => y = sin\"",outfile: "B y''=-y.data", analytical: Sin);
 	}	
 	
 	static void WriteData(genlist<double> xdata, genlist<vector> ydata, string name, string outfile, Func<double,double> analytical=null)
 	{
-		using (StreamWriter output = new StreamWriter(outfile, append: false))
+		using (StreamWriter output = new StreamWriter($"data/{outfile}", append: false))
 		{
 			output.WriteLine(name); // numerical-data header
 			for(int i=0;i<xdata.size;i++) 
@@ -91,6 +93,7 @@ public class main
 	
 	static void PlanetaryMotion()
 	{
+		// test of newtonian gravitation
 		masses = new List<double>(){2e30, 6e24};
 		G = 6.67e-11;
 		genlist<double> xs;
@@ -102,7 +105,35 @@ public class main
 		WriteData(xdata: xs, ydata: ys, name: "time sunx Sun sunvx sunvy earthx Earth earthvx earthvy", outfile: "planetHighAcc.data");
 
 		(xs,ys) = drive(Gravitation, x0: 0, y0: y0, xf: 1e9, h: 1e-2, acc: 1e-2, eps: 1e-2, method: "rkf45");
-		WriteData(xdata: xs, ydata: ys, name: "time sunx Sun sunvx sunvy earthx Earth earthvx earthvy", outfile: "planetLowAcc.data");	
+		WriteData(xdata: xs, ydata: ys, name: "time sunx Sun sunvx sunvy earthx Earth earthvx earthvy", outfile: "planetLowAcc.data");
+
+		// B) relativistic motion
+		xs = new genlist<double>(); 
+		ys = new genlist<vector>();
+		y0 = new vector(1, 0);
+
+		eps = 0;
+		driver(relativisticMotion, x0: 0, y0: y0, xf: 1*2*PI, h: 1e-2, acc: 1e-7, eps: 1e-7, xlist: xs, ylist: ys, method: "rkf45");
+		WriteData(xs, ys, "a planet", outfile: "GRi.data");
+
+		y0 = new vector(1, -0.5);
+		(xs,ys) = drive(relativisticMotion, x0: 0, y0: y0, xf: 1*2*PI, h: 1e-2, acc: 1e-7, eps: 1e-7, method: "rkf45");
+		WriteData(xs, ys, "a planet", outfile: "GRii.data");
+
+		eps = 0.01;
+		(xs,ys) = drive(relativisticMotion, x0: 0, y0: y0, xf: 4*2*PI, h: 1e-2, acc: 1e-7, eps: 1e-7, method: "rkf45");
+		WriteData(xs, ys, "a planet", outfile: "GRiii.data");
+
+		(xs,ys) = drive(relativisticMotion, x0: 0, y0: y0, xf: 98*2*PI, h: 1e-2, acc: 1e-6, eps: 1e-6, method: "rkf45");
+		WriteData(xs, ys, "a planet", outfile: "donut.data");
+			
+	}
+	static vector relativisticMotion(double phi, vector y)
+	{
+		double u = y[0], uP = y[1];  //u, u'
+		double uPP = 1 - u + eps*u*u; //u''
+		vector dydphi = new vector(uP,uPP);
+		return dydphi;
 	}
 	
 	static vector Gravitation(double t, vector y)

@@ -13,7 +13,8 @@ plots : plots.gpi Out.txt main.cs ode.cs
 	gnuplot $<
 
 Out.txt : main.exe
-	$(TIME) mono main.exe > Out.txt
+	#$(TIME)\
+	mono main.exe > Out.txt
 
 main.exe : main.cs linalg.dll genlist.dll ode.dll
 	mcs $(CODE) $(DLLS)
