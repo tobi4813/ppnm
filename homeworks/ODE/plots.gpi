@@ -27,14 +27,14 @@ set multiplot layout 3,1
 set xrange [-2.2e11:2.2e11]
 set yrange [-2.2e11:2.2e11]
 
-set title "Earth around sun simulation in 1 year" font ",18"
-plot "planetHighAcc.data" using 6:7 every ::::25357 with lines\
+set title "Earth around sun simulation in 0.95 year" font ",18"
+plot "planetHighAcc.data" using 6:7 every ::::104 with lines\
 	,"planetHighAcc.data" using 2:3 every ::::1 with points pt 3 pointsize 2 linecolor rgb "orange"	
 
-set title "Earth around sun simulation in 1.05 year" font ",18"
+set title "Earth around sun simulation in 1 year" font ",18"
 plot "planetHighAcc.data" using 6:7 with lines\
 	,"planetHighAcc.data" using 2:3 every ::::1 with points pt 3 pointsize 2 linecolor rgb "orange"	
 
-set title "If God wasn't very accurate" 
+set title "Mandala" 
 plot "planetLowAcc.data" using 6:7 with lines\
 	,"planetLowAcc.data" using 2:3 every ::::1 with points pt 3 pointsize 2 linecolor rgb "orange"	

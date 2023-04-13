@@ -12,8 +12,8 @@ public class main
 	
 	public static void Main()
 	{
-		//Tests();
-		//Eight();
+		Tests();
+		Eight();
 		PlanetaryMotion();
 	}
 	static void Tests()
@@ -21,21 +21,21 @@ public class main
 		genlist<double> xs;
 		genlist<vector> ys;
 		
-		(xs,ys) = drive(FirstOrder, x0: 0, y0: new vector("1"), xf: 2, h: 1e-2, acc: 1e-8, eps: 1e-9);
+		(xs,ys) = drive(FirstOrder, x0: 0, y0: new vector("1"), xf: 2, h: 1e-2, acc: 1e-7, eps: 1e-7);
 		WriteData(xs, ys, "\"numerical, y' = y. y0 = 1 => y = exp\"",outfile: "y'=y.data", analytical: Exp);	
 		
-		(xs,ys) = drive(SecondOrder, x0: 0, y0: new vector("1 0"), xf: 3*PI, h: 1e-2, acc: 1e-8, eps: 1e-9); //y0 = [y0, y'0]
+		(xs,ys) = drive(SecondOrder, x0: 0, y0: new vector("1 0"), xf: 3*PI, h: 1e-2, acc: 1e-7, eps: 1e-7); //y0 = [y0, y'0]
 		WriteData(xs, ys, "\"numerical, y'' = -y. y0 = 1, y'0 = 0 => y = cos\"",outfile: "y''=-y.data", analytical: Cos);
 		
-		(xs,ys) = drive(Pendulum, x0: 0, y0: new vector($"{PI-0.1} 0"), xf: 10, h: 5e-1, acc: 1e-8, eps: 1e-8); //y0 = [y0, y'0]
+		(xs,ys) = drive(Pendulum, x0: 0, y0: new vector($"{PI-0.1} 0"), xf: 10, h: 5e-1, acc: 1e-7, eps: 1e-7); //y0 = [y0, y'0]
 		WriteData(xs, ys, "t \"{/Symbol q}(t)\" \"{/Symbol w}(t)\"",outfile: "pendulum.data");
 
-		genlist<double> xlist = new genlist<double>();
-		genlist<vector> ylist = new genlist<vector>();
-		vector y = driver(SecondOrder, x0: 0, y0: new vector("1 0"), xf: 3*PI, h: 1e-2, acc: 1e-8, eps: 1e-9); //
-		WriteLine($"Solving u'' = -u while not keeping intermediate points: size of xlist={xlist.size}, size of ylist={ylist.size}, final point={y[0]}=cos(3*pi)={Cos(3*PI)}");
-		driver(SecondOrder, x0: 0, y0: new vector("1 0"), xf: 3*PI, h: 1e-2, acc: 1e-8, eps: 1e-9, xlist: xlist, ylist: ylist); //
-		WriteLine($"After feeding the driver empty lists: size of xlist={xlist.size}, size of ylist={ylist.size}");
+		//genlist<double> xlist = new genlist<double>();
+		//genlist<vector> ylist = new genlist<vector>();
+		//vector y = driver(SecondOrder, x0: 0, y0: new vector("1 0"), xf: 3*PI, h: 1e-2, acc: 1e-8, eps: 1e-9); //
+		//WriteLine($"Solving u'' = -u while not keeping intermediate points: size of xlist={xlist.size}, size of ylist={ylist.size}, final point={y[0]}=cos(3*pi)={Cos(3*PI)}");
+		//driver(SecondOrder, x0: 0, y0: new vector("1 0"), xf: 3*PI, h: 1e-2, acc: 1e-8, eps: 1e-9, xlist: xlist, ylist: ylist); //
+		//WriteLine($"After feeding the driver empty lists: size of xlist={xlist.size}, size of ylist={ylist.size}");
 	}	
 	
 	static void WriteData(genlist<double> xdata, genlist<vector> ydata, string name, string outfile, Func<double,double> analytical=null)
@@ -85,7 +85,7 @@ public class main
 		double vx3=-0.93240737, vy3=-0.86473146, vx1=-vx3/2, vy1=-vy3/2, vx2=vx1, vy2=vy1;
 		vector y0 = new vector($"{x1} {y1} {vx1} {vy1} {x2} {y2} {vx2} {vy2} {x3} {y3} {vx3} {vy3}");
 
-		(xs,ys) = drive(Gravitation, 0, y0, 6.32591398, acc: 1e-8, eps: 1e-9);
+		(xs,ys) = drive(Gravitation, 0, y0, 6.32591398, acc: 1e-6, eps: 1e-6,method: "rkf45"); //1e-8 1e-9
 		WriteData(xs, ys, "t x1 m_1 vx1 vy1 x2 m_2 vx2 vy2 x3 m_3 vx3 vy3", "eight.data");
 	}
 	
@@ -95,13 +95,13 @@ public class main
 		G = 6.67e-11;
 		genlist<double> xs;
 		genlist<vector> ys;
-		double sunX=0, sunY=0, sunVX=0, sunVY=0, earthX=149577000000, earthY=0, earthVX=0, earthVY=29780; //[r] = m, [v] = m/s 
+		double sunX=0, sunY=0, sunVX=0, sunVY=0, earthX=149577000000, earthY=0, earthVX=0, earthVY=29780; //units [r] = m, [v] = m/s 
 		vector y0 = new vector($"{sunX} {sunY} {sunVX} {sunVY} {earthX} {earthY} {earthVX} {earthVY}");
 
-		(xs,ys) = drive(Gravitation, x0: 0, y0: y0, xf: 3.3e7, h: 1e-2, acc: 1e-8, eps: 3e-9); //eps=3e-9 pretty accurate ~10 seconds run time
+		(xs,ys) = drive(Gravitation, x0: 0, y0: y0, xf: 3.16e7, h: 1e-2, acc: 1e-7, eps: 1e-7); 
 		WriteData(xdata: xs, ydata: ys, name: "time sunx Sun sunvx sunvy earthx Earth earthvx earthvy", outfile: "planetHighAcc.data");
 
-		(xs,ys) = drive(Gravitation, x0: 0, y0: y0, xf: 3.3e7, h: 1e-2, acc: 1e-7, eps: 5e-8); //eps=3e-9 pretty accurate ~10 seconds run time
+		(xs,ys) = drive(Gravitation, x0: 0, y0: y0, xf: 1e9, h: 1e-2, acc: 1e-2, eps: 1e-2, method: "rkf45");
 		WriteData(xdata: xs, ydata: ys, name: "time sunx Sun sunvx sunvy earthx Earth earthvx earthvy", outfile: "planetLowAcc.data");	
 	}
 	

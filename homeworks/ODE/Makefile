@@ -5,14 +5,15 @@ GENLISTDIR = ../../exercises/genlist
 DLLS = $(addprefix -reference:,$(filter %.dll,$^))
 CODE = $(filter %.cs,$^)
 MKLIB = mcs -target:library -out:$@ $(DLLS) $(CODE)
+TIME = time --portability --append --output Out.txt
 
-$(info Making the data may take up to ~30s depending on hardware)
+#$(info Making the data may take up to ~1s depending on hardware)
 
-plots.svg : plots.gpi Out.txt main.cs
+plots : plots.gpi Out.txt main.cs ode.cs
 	gnuplot $<
 
 Out.txt : main.exe
-	mono main.exe > Out.txt
+	$(TIME) mono main.exe > Out.txt
 
 main.exe : main.cs linalg.dll genlist.dll ode.dll
 	mcs $(CODE) $(DLLS)
