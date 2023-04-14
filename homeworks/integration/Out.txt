@@ -1,18 +1,43 @@
+
+------< A) >---------------------------------------------------------------------
+
 Results below (accuracy of 0.001 fulfilled)
 
+Integral of sqrt(x) from 0 to 1:
+ Numerical: 0.459697510758029
+     Exact: 0.6666667
+
 Integral of 1/sqrt(x) from 0 to 1:
- Numerical: 1.99996150007805
+ Numerical: 1.99999738796403
      Exact: 2
 
 Integral of 4*sqrt(1-x²) from 0 to 1:
- Numerical: 3.14183457802727
+ Numerical: 3.14159750770263
      Exact: 3.14159265358979
 
 Integral of ln(x)/sqrt(x) from 0 to 1:
- Numerical: -3.99991705899915
+ Numerical: -3.99999834899021
      Exact: -4
 
-erf(1) = 0.842729958487199
-Expected: 0.84270079 (from WolframAlpha)
-erf(2) = 0.994900318508938
-Expected: 0.99532227 (from WolframAlpha)
+erf(1):
+        With integrator: 0.842729958487199
+               Expected: 0.84270079 (from WolframAlpha)
+     From plot exercise: 0.84270068974759
+Integrator (better acc): 0.842700793017909
+erf(2):
+        With integrator: 0.994900318508938
+               Expected: 0.99532227 (from WolframAlpha)
+     From plot exercise: 0.995322139581219
+Integrator (better acc): 0.995322288126349
+
+------< B) >---------------------------------------------------------------------
+
+Integral of 1/sqrt(x) from 0 to 1 (value, # of integrand evaluations) with abs/rel acc=1e-4 (scipy.quad still achieves a much better accuracy somehow)
+   Open Adaptive: (1.99999738796403, 17140)
+ Clenshaw-Curtis: (1.9999998903107, 52)
+      scipy.quad: (1.9999999999999984, 231)
+
+Integral of ln(x)/sqrt(x) from 0 to 1 (value, # of integrand evaluations):
+   Open Adaptive: (-3.99999834899021, 29972)
+ Clenshaw-Curtis: (-3.99999813339603, 272)
+      scipy.quad: (-4.000000000000085, 315)
