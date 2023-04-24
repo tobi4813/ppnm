@@ -4,19 +4,20 @@ using static System.Math;
 
 public static class Roots
 {
-	public static vector Newton(Func<vector,vector> f, vector x, double eps=1e-2)
+	public static vector Newton(Func<vector,vector> f, vector x, double eps=1e-2, int maxIterations=1000)
 	{
 		int n = x.size;
 		int j = 0;
+		//using (StreamWriter output = new StreamWriter("test.txt", append: true))
+		//{
+		//output.WriteLine("yo");
 		do
 		{
-			using (StreamWriter output = new StreamWriter("test.txt", append: true))
-			{
-			
+			//output.WriteLine("yo2");
 			j++;
-			if (j>10000) return 4*x;
+			if(j>=maxIterations) throw new ArgumentException($"Maxmimum number of iterations reached {j}");
 			if (f(x).norm() < eps) return x;
-			matrix J = new matrix(n,n);
+			matrix J = new matrix(n,n); //outside?
 			vector dxs = new vector(n);
 			for(int k=0;k<n;k++)
 			{
@@ -29,18 +30,22 @@ public static class Roots
 			}
 			QRGS JDx = new QRGS(J);
 			vector Dx = JDx.solve(-f(x));
-			output.WriteLine(Dx.norm());
-			output.WriteLine(dxs.norm());
+			//output.WriteLine(dxs.norm());
+			//output.WriteLine($" x: {x[0]}");
+			//output.WriteLine($"DX: {Dx[0]}");
 			if (Dx.norm() < dxs.norm()) throw new ArgumentException("Newton: Δx<δx, solution not found");
 			double lambda = 1; // define before first do?
 			do
 			{
 				lambda /= 2;
-				
-			}while( f(x+lambda*Dx).norm() > (1-lambda/2)*f(x).norm() && lambda > 1/128 );	
+			}while( f(x+lambda*Dx).norm() > (1-lambda/2)*f(x).norm() && lambda > 1f/128 );	
 			x += lambda*Dx;	
-			output.WriteLine();
-			}
+			//output.WriteLine($" l: {lambda}");
+			//output.WriteLine($"x1: {x[0]}");
+			//output.WriteLine($" f: {f(x)[0]}");
+			//output.WriteLine();
+			
 		}while(true);
+	//	}
 	}
 }

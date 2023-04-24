@@ -10,8 +10,8 @@
 | 5  | ODE           	| 6 | 3 | 1 |  10 |
 | 6  | Integration     	| 6 | 3 | - |  9  |
 | 7  | Monte Carlo     	| - | - | - |  0  |
-| 8  | Root finding    	| 6 | - | - |  6  |
+| 8  | Root finding    	| 6 | 3 | - |  9  |
 | 9  | Minimization    	| - | - | - |  0  |
 | 10 | ...           	| - | - | - |  0  |
 | 11 | ...           	| - | - | - |  0  |
-| .. | total points: 	| - | - | - | 52  |
+| .. | total points: 	| - | - | - | 55  |
