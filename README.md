@@ -11,7 +11,7 @@
 | 6  | Integration     	| 6 | 3 | - |  9  |
 | 7  | Monte Carlo     	| - | - | - |  0  |
 | 8  | Root finding    	| 6 | 3 | - |  9  |
-| 9  | Minimization    	| - | - | - |  0  |
+| 9  | Minimization    	| 6 | - | - |  6  |
 | 10 | ...           	| - | - | - |  0  |
 | 11 | ...           	| - | - | - |  0  |
-| .. | total points: 	| - | - | - | 55  |
+| .. | total points: 	| - | - | - | 61  |

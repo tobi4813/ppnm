@@ -5,7 +5,6 @@ using static System.Console;
 using static Roots;
 using static System.Math;
 using static solveODE;
-using static System.Math;
 
 static class main
 {
