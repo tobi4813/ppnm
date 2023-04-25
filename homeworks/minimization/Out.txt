@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------------------------
 Rosenbrock's valley function has a minimum at (x,y) = (1.00004058158725,1.00004158919583)
-Computed in 4 steps from the initial guess of         5         12 
+Computed in 4 steps from the initial guess at         5         12 
 ----------------------------------------------------------------------------------------------------
 According to WikiPedia, Himmelblau's function has 4 minima. They match the 4 numerical ones:
 (x,y) = (3.00000044602814,1.99999905991812) computed in 11 steps from the initial point (4,3)

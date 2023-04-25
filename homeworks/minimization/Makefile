@@ -4,10 +4,13 @@ DLLS = $(addprefix -reference:,$(filter %.dll,$^))
 CODE = $(filter %.cs,$^)
 MKLIB = mcs -target:library -out:$@ $(DLLS) $(CODE)
 
-Out.txt : main.exe
-	mono main.exe > Out.txt
+plot : higgs.gpi Out.txt
+	gnuplot $<
 
-main.exe : main.cs linalg.dll mini.dll # ppnm.dll # QRGS.dll ode.dll genlist.dll
+Out.txt : main.exe
+	mono main.exe <higgs.dat 1> Out.txt
+
+main.exe : main.cs linalg.dll mini.dll ppnm.dll
 	mcs $(CODE) $(DLLS)
 
 linalg.dll : $(MATLIBDIR)/matrix.cs $(MATLIBDIR)/vector.cs
@@ -16,8 +19,8 @@ linalg.dll : $(MATLIBDIR)/matrix.cs $(MATLIBDIR)/vector.cs
 mini.dll : mini.cs linalg.dll
 	$(MKLIB)
 
-#ppnm.dll : ../lineq/QRGS.cs $(GENLISTDIR)/genlist.cs ../ODE/ode.cs linalg.dll
-#	$(MKLIB)
+ppnm.dll : $(GENLISTDIR)/genlist.cs 
+	$(MKLIB)
 
 clean :
-	rm *.exe *.dll *.txt
+	rm *.exe *.dll *.txt *.data *.svg

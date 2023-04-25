@@ -1,0 +1,9 @@
+set terminal svg background "white"
+set output "Higgs.svg"
+
+set title "Expected mass is 125.25(17) GeV/c²" 
+set xlabel "Energy (GeV)"
+set ylabel "Signal (certain units)"
+set key autotitle columnheader
+plot "higgs.dat" with yerrorbars pt 7 ps 0.7 lc rgb "black"\
+	,"fit.data" with lines dashtype 3 lw 3 lc rgb "#3f3f3f"

@@ -10,7 +10,7 @@ public static class Minimization
 		vector solution = qnewton(f,x,acc,maxIterations);
 		return (solution, count);
 	}
-	public static vector qnewton(Func<vector,double> f, vector x, double acc=1e-3, int maxIterations=1000)
+	public static vector qnewton(Func<vector,double> f, vector x, double acc=1e-3, int maxIterations=10000)
 	{
 		int n = x.size;
 		matrix B = id(n);
