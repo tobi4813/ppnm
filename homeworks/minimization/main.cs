@@ -9,7 +9,8 @@ static class main
 	static void Main()
 	{	
 		TestA();
-	
+
+		////////////// b //////////////////////////////////////////////////////////////////////
 		var energy = new genlist<double>();	
 		var signal = new genlist<double>();	
 		var error = new genlist<double>();
@@ -37,11 +38,22 @@ static class main
 		int resolution = 1000; 
 		using (StreamWriter output = new StreamWriter("fit.data"))
 		{
-			output.WriteLine($"Energy \" m={Round(higgs[0],0)}GeV/c²\"");
+			output.WriteLine($"Energy \" m={Round(higgs[0],2)}GeV/c²\"");
 			for(int i=0;i<resolution;i++)
 			{	
 				double E = energy[0] + (energy[energy.size-1] - energy[0])/resolution*(i+1);
 				output.WriteLine($"{E} {BW(E,higgs)}");
+			}
+		}
+		////////////// c /////////////////////////////////////////////////////////////
+		vector higgsAmoeba = amoeba(Deviation, guess).Item1;
+		using (StreamWriter output = new StreamWriter("amoebafit.data"))
+		{
+			output.WriteLine($"Energy \" m={Round(higgsAmoeba[0],2)}GeV/c²\"");
+			for(int i=0;i<resolution;i++)
+			{	
+				double E = energy[0] + (energy[energy.size-1] - energy[0])/resolution*(i+1);
+				output.WriteLine($"{E} {BW(E,higgsAmoeba)}");
 			}
 		}
 	}
@@ -52,12 +64,15 @@ static class main
 	}
 	static void TestA()
 	{
-		vector x0 = new vector(5,12);
-		(vector rb,int steps) = qnewtonCount(Rosenbrock, x0);
+		vector x0 = new vector(100,-2000);
+		(vector rb,int steps) = qnewtonCount(Rosenbrock, x0, acc:1e-8);
 		Divide();
 		WriteLine($"Rosenbrock's valley function has a minimum at (x,y) = ({rb[0]},{rb[1]})");
 		x0.print($"Computed in {steps} steps from the initial guess at"); 
-		
+
+		(vector ab, int absteps) = amoeba(Rosenbrock, x0, acc: 1e-7, initialSize:20);
+		WriteLine($"Using the downhill simplex method: (x,y) = ({ab[0]},{ab[1]}) in {absteps} steps");
+	
 		Divide();
 		WriteLine("According to WikiPedia, Himmelblau's function has 4 minima. They match the 4 numerical ones:");
 		matrix x0s = new matrix("4 3;-1 1;-4 -4; 3 -2");
