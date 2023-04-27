@@ -6,7 +6,7 @@
 | 1  | Linear equations | 6 | 3 | - |  9  |
 | 2  | EVD           	| 6 | 3 | - |  9  | 
 | 3  | Least Squares  	| 6 | 3 | - |  9  |
-| 4  | Splines       	| - | - | - |  0  |
+| 4  | Splines       	| 6 | 0(1?)| - |  6(7?) |
 | 5  | ODE           	| 6 | 3 | 1 |  10 |
 | 6  | Integration     	| 6 | 3 | - |  9  |
 | 7  | Monte Carlo     	| - | - | - |  0  |
@@ -14,4 +14,4 @@
 | 9  | Minimization    	| 6 | 3 | 1 |  10 |
 | 10 | ...           	| - | - | - |  0  |
 | 11 | ...           	| - | - | - |  0  |
-| .. | total points: 	| - | - | - | 65  |
+| .. | total points: 	| - | - | - | 71(72?)  |
