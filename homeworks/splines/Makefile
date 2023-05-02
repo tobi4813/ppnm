@@ -10,14 +10,19 @@ plot : plot.gpi Out.txt
 Out.txt : main.exe
 	mono main.exe > Out.txt
 
-main.exe : main.cs linalg.dll splines.dll
+main.exe : main.cs linalg.dll genlist.dll splines.dll
 	mcs $(CODE) $(DLLS)
 
 linalg.dll : $(MATLIBDIR)/matrix.cs $(MATLIBDIR)/vector.cs
 	$(MKLIB)
 
-splines.dll : splines.cs linalg.dll
+genlist.dll : ../../exercises/genlist/genlist.cs
 	$(MKLIB)
 
+splines.dll : splines.cs qsplines.cs linsplines.cs linalg.dll genlist.dll
+	$(MKLIB)
+
+
 clean :
-	rm *.exe *.dll *.txt *.data *.svg
+	rm *.exe *.dll *.txt *.svg
+	rm -rfv data

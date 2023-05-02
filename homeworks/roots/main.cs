@@ -112,11 +112,12 @@ static class main
 				data[1,i] = E0[0];
 			}
 	}
-	static Func<double, vector, vector> Hydrogen(double E)
+	static Func<double, vector, vector> Hydrogen(double E) // returns differential equation to be solved by ODEsolve
 	{	
 		Func<double, vector, vector> f = (r,y) => new vector(y[1], -2*(E+1/r)*y[0]);
 		return f;
 	}	
+	// returns function to find root of
 	static Func<vector,vector> M(double rmin, double rmax, genlist<double> rs=null, genlist<vector>ys=null, double acc=1e-4,double eps=1e-4)
 	{
 		vector f0 = new vector(rmin-rmin*rmin,1-2*rmin);

@@ -252,7 +252,7 @@
 	<path stroke='black'  d='M54.53,334.00 L54.53,464.00 L374.82,464.00 L374.82,334.00 L54.53,334.00 Z  '/></g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<g transform="translate(214.67,282.20)" stroke="none" fill="black" font-family="Arial" font-size="16.00"  text-anchor="middle">
-		<text><tspan font-family="Arial" >Area from 0 to 2.25 is 1.612 (Should be 1.628)</tspan></text>
+		<text><tspan font-family="Arial" >Area from 0 to 2.25 is 1.61 (Should be 1.63)</tspan></text>
 	</g>
 	<g transform="translate(214.67,306.20)" stroke="none" fill="black" font-family="Arial" font-size="16.00"  text-anchor="middle">
 		<text><tspan font-family="Arial" >		Area from 0 to pi is 1.98 (should be 2)</tspan></text>

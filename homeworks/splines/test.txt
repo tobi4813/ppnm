@@ -1,6 +1,0 @@
-Before first loop
-Just after first loop
-Before 2nd loop
-Just after 2nd loop
-Before 3rd loop
-After 3rd loop

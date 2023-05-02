@@ -8,24 +8,35 @@ set title "Area from 1 to 2: 0.5 | Area from 1 to 2.5: 1\n\
 
 set xrange [0:5]
 set yrange[-0.5:1.5]
-plot "trapezium.data" with lines lt 2 title ""\
-	,"trapezium.data" with points pt 7 title ""\
-	,"trapezium.data" every 3::0::4 with lines dashtype 2 lt 2 title ""
+plot "data/trapezium.data" with lines lt 2 title ""\
+	,"data/trapezium.data" with points pt 7 title ""\
+	,"data/trapezium.data" every 3::0::4 with lines dashtype 2 lt 2 title ""
 
-set title "Area from 0 to 2.25 is 1.612 (Should be 1.628)\n\
+set title "Area from 0 to 2.25 is 1.61 (Should be 1.63)\n\
 		Area from 0 to pi is 1.98 (should be 2)" font ",16"
 
 set key font ",14"
 set xrange [0:3.15]
 set yrange [0:1.4]
-plot "sinus.data" with lines lt 2 title ""\
-	,"sinus.data" with points pt 7 ps 0.5 title "Points from sin(x)"
+plot "data/sinus.data" with lines lt 2 title ""\
+	,"data/sinus.data" with points pt 7 ps 0.5 title "Points from sin(x)"
 	
 unset multiplot
 unset xrange
 unset yrange
-unset title
-set terminal svg background "white"
+set title "Random points"
+set terminal svg background "white" size 400,800
 set output "Qspline.svg"
-plot "qsplinepoints.data" with points pt 7 title ""\
-	,"qspline.data" with lines lw 5 title ""
+set multiplot layout 2,1
+
+plot "data/qRandompoints.data" with points pt 7 title ""\
+	,"data/qRandom.data" with lines lw 5 title ""\
+	,"data/qRandomDerivative.data" with lines lw 2 lt 1 title "derivative of qSpline"
+
+set title "Sin(x). Area from 0 to 2.25 is 1.630 (should be 1.628)\n\
+	Area from 0 to Pi is 2.002 (should be 2)\n\
+	Area from 0 to 2 Pi is 0 (should be 0)"
+plot "data/qSinepoints.data" with points pt 7 title ""\
+	,"data/qSine.data" with lines lw 5 title ""\
+	,cos(x) with lines lt 4 lw 6\
+	,"data/qSineDerivative.data" with lines lw 2 lc rgb "black" title "Derivative of quad spline"
