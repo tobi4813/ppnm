@@ -1,14 +1,14 @@
-set terminal svg background "white" size 1000,2000
-set output "swave.svg"
+set terminal svg background "white" size 700,1200
+set output "Swave.svg"
 set multiplot layout 3,1
 set size ratio 1/1.5
 set lmargin 10
 set rmargin 3
 
-keysize = "14"
-labelsize = "17"
-ticksize = "12"
-point_size = "0.5"
+keysize = "17"
+labelsize = "20"
+ticksize = "15"
+point_size = "0.8"
 
 set xlabel "{/Symbol D}r" font ",".labelsize
 set ylabel "{/Symbol e}_0" font ",".labelsize
@@ -27,7 +27,7 @@ bruh = "with lines"
 
 set xlabel "r"
 set ylabel "f(r)
-set key autotitle columnheader horizontal outside below
+set key autotitle columnheader horizontal maxrows 3 outside below font ",14"
 stats "waveFunction.data" using 0 nooutput
 plot for [i=0:(STATS_blocks-1)/2] "waveFunction.data" using 1:2 index 2*i with points pointtype 7 pointsize 0.8 \
 	, for [i=0:(STATS_blocks-1)/2] "waveFunction.data" using 1:2 index 2*i+1 with lines linewidth 2 linecolor rgb "black" 

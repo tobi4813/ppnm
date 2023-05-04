@@ -58,7 +58,7 @@ public class main
 			int npoints = (int)(rmax/dr);
 			for(int i=0;i<numberOfFunctions;i++)
 			{
-				WriteLine($"\"{i}'th-eigenfunction (numerical)\"");
+				WriteLine($"\"{i+1}s wave (numerical)\"");
 				for(int j=0;j<npoints;j++)
 				{
 					double r_j = dr*(j+1); // r_j
@@ -67,7 +67,7 @@ public class main
 				}
 				Write("\n\n"); // 2 empty lines seperates datasets in gnuplot
 
-				WriteLine($"\"{i}'th-eigenfunction (analytical)\"");
+				WriteLine($"\"{i+1}s wave (analytical)\"");
 				int analyticalResolution = 1000;
 				for(int j=0;j<analyticalResolution;j++)
 				{

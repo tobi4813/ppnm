@@ -1,10 +1,10 @@
 DIR = ../../matlib/matrix
 
-Out.txt : main.exe swave.svg Makefile
-	mono main.exe -test:5 > Out.txt
-
-swave.svg : swave.gpi fixedRmax.data fixedDr.data waveFunction.data
+plot : swave.gpi Out.txt fixedRmax.data fixedDr.data waveFunction.data
 	gnuplot $<
+
+Out.txt : main.exe
+	mono main.exe -test:5 > Out.txt
 
 main.exe : main.cs linalg.dll EVD.dll
 	mcs $(filter %.cs,$^) $(addprefix -reference:,$(filter %.dll,$^))

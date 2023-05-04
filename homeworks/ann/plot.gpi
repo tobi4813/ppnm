@@ -1,0 +1,52 @@
+set terminal svg background "white" size 1200,1600
+set output "test.svg"
+set multiplot layout 4,3
+
+set key below maxrows 2 width -8 font ",13"
+set title "6 Hidden networks, 12 training points" font ",16"
+plot cos(5*x-1)*exp(-x*x) with lines lw 2.5 lt 1 title "Analytical expression"\
+	,"data/test1Training.data" with points pt 3 ps 1.5 lt 8 title "Training points"\
+	,"data/test1Interpolation.data" using 1:2 with points pt 7 ps 1 lt 2 title "Interpolation by ann"
+
+set title "6 Hidden networks, 7 training points"
+plot cos(5*x-1)*exp(-x*x) with lines lw 2.5 lt 1 title "Analytical expression"\
+	,"data/test2Training.data" with points pt 3 ps 1.5 lt 8 title "Training points"\
+	,"data/test2Interpolation.data" using 1:2 with points pt 7 ps 1 lt 2 title "Interpolation by ann"
+	
+set title "3 Hidden networks, 12 training points"
+plot cos(5*x-1)*exp(-x*x) with lines lw 2.5 lt 1 title "Analytical expression"\
+	,"data/test3Training.data" with points pt 3 ps 1.5 lt 8 title "Training points"\
+	,"data/test3Interpolation.data" using 1:2 with points pt 7 ps 1 lt 2 title "Interpolation by ann"
+
+set title "Derivative"	
+plot -5*sin(5*x-1)*exp(-x*x) - 2*x*cos(5*x-1)*exp(-x*x) with lines lw 2.5 title "Analytical derivative"\
+	,"data/test1Interpolation.data" using 1:3 with points pt 7 ps 1 lt 2 title "Derivative by ANN"
+	
+plot -5*sin(5*x-1)*exp(-x*x) - 2*x*cos(5*x-1)*exp(-x*x) with lines lw 2.5 title "Analytical derivative"\
+	,"data/test2Interpolation.data" using 1:3 with points pt 7 ps 1 lt 2 title "Derivative by ANN"
+	
+plot -5*sin(5*x-1)*exp(-x*x) - 2*x*cos(5*x-1)*exp(-x*x) with lines lw 2.5 title "Analytical derivative"\
+	,"data/test3Interpolation.data" using 1:3 with points pt 7 ps 1 lt 2 title "Derivative by ANN"
+
+set title "2nd Derivative"
+plot exp(-x*x)*(-25*cos(5*x-1) + 10*x*sin(5*x-1) - 2*cos(5*x-1) + 10*x*sin(5*x-1) + 4*x*x*cos(5*x-1)) with lines lw 2.5\
+		 title "Analytical 2nd derivative"\
+	,"data/test1Interpolation.data" using 1:4 with points pt 7 ps 1 lt 2 title "2nd Derivative by ANN"
+	
+plot exp(-x*x)*(-25*cos(5*x-1) + 10*x*sin(5*x-1) - 2*cos(5*x-1) + 10*x*sin(5*x-1) + 4*x*x*cos(5*x-1)) with lines lw 2.5\
+		 title "Analytical 2nd derivative"\
+	,"data/test2Interpolation.data" using 1:4 with points pt 7 ps 1 lt 2 title "2nd Derivative by ANN"
+	
+plot exp(-x*x)*(-25*cos(5*x-1) + 10*x*sin(5*x-1) - 2*cos(5*x-1) - 10*x*sin(5*x-1) + 4*x*x*cos(5*x-1)) with lines lw 2.5\
+		 title "Analytical 2nd derivative"\
+	,"data/test3Interpolation.data" using 1:4 with points pt 7 ps 1 lt 2 title "2nd Derivative by ANN"
+
+set title "Integral"
+plot "data/test1Interpolation.data" using 1:5 with points pt 7 ps 1 lt 2 title "Integral by ANN"
+plot "data/test2Interpolation.data" using 1:5 with points pt 7 ps 1 lt 2 title "Integral by ANN"
+plot "data/test3Interpolation.data" using 1:5 with points pt 7 ps 1 lt 2 title "Integral by ANN"
+#(1/(4*exp(25/4))*sqrt(pi)*( cos(1)*erf((2*x-{0,5})/2) + cos(1)*erf((2*x+{0,5})/2)\
+#		 - sin(1)*(-{0,1}*erf(x+{0,5}/2)-{0,1}*erf(-x+{0,5}/2))))
+
+	
+	

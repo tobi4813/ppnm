@@ -12,6 +12,6 @@
 | 7  | Monte Carlo     	| - | - | - |  0  |
 | 8  | Root finding    	| 6 | 3 | - |  9  |
 | 9  | Minimization    	| 6 | 3 | 1 |  10 |
-| 10 | ...           	| - | - | - |  0  |
+| 10 | Neural Network  	| 6 | 3 | - |  9  |
 | 11 | ...           	| - | - | - |  0  |
-| .. | total points: 	| - | - | - | 74  |
+| .. | total points: 	| - | - | - | 83  |
