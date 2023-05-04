@@ -244,7 +244,7 @@
 	<path stroke='black'  d='M54.53,60.01 L54.53,325.00 L374.82,325.00 L374.82,60.01 L54.53,60.01 Z  '/></g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<g transform="translate(214.67,32.21)" stroke="none" fill="black" font-family="Arial" font-size="16.00"  text-anchor="middle">
-		<text><tspan font-family="Arial" >6 Hidden networks, 12 training points</tspan></text>
+		<text><tspan font-family="Arial" >6 Hidden neurons, 12 training points</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -447,7 +447,7 @@
 	<path stroke='black'  d='M454.53,60.01 L454.53,325.00 L774.82,325.00 L774.82,60.01 L454.53,60.01 Z  '/></g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<g transform="translate(614.67,32.21)" stroke="none" fill="black" font-family="Arial" font-size="16.00"  text-anchor="middle">
-		<text><tspan font-family="Arial" >6 Hidden networks, 7 training points</tspan></text>
+		<text><tspan font-family="Arial" >6 Hidden neurons, 7 training points</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
@@ -655,7 +655,7 @@
 	<path stroke='black'  d='M854.53,60.01 L854.53,325.00 L1174.82,325.00 L1174.82,60.01 L854.53,60.01 Z  '/></g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">
 	<g transform="translate(1014.67,32.21)" stroke="none" fill="black" font-family="Arial" font-size="16.00"  text-anchor="middle">
-		<text><tspan font-family="Arial" >3 Hidden networks, 12 training points</tspan></text>
+		<text><tspan font-family="Arial" >3 Hidden neurons, 12 training points</tspan></text>
 	</g>
 </g>
 <g fill="none" color="black" stroke="currentColor" stroke-width="1.00" stroke-linecap="butt" stroke-linejoin="miter">

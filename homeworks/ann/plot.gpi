@@ -3,17 +3,17 @@ set output "test.svg"
 set multiplot layout 4,3
 
 set key below maxrows 2 width -8 font ",13"
-set title "6 Hidden networks, 12 training points" font ",16"
+set title "6 Hidden neurons, 12 training points" font ",16"
 plot cos(5*x-1)*exp(-x*x) with lines lw 2.5 lt 1 title "Analytical expression"\
 	,"data/test1Training.data" with points pt 3 ps 1.5 lt 8 title "Training points"\
 	,"data/test1Interpolation.data" using 1:2 with points pt 7 ps 1 lt 2 title "Interpolation by ann"
 
-set title "6 Hidden networks, 7 training points"
+set title "6 Hidden neurons, 7 training points"
 plot cos(5*x-1)*exp(-x*x) with lines lw 2.5 lt 1 title "Analytical expression"\
 	,"data/test2Training.data" with points pt 3 ps 1.5 lt 8 title "Training points"\
 	,"data/test2Interpolation.data" using 1:2 with points pt 7 ps 1 lt 2 title "Interpolation by ann"
 	
-set title "3 Hidden networks, 12 training points"
+set title "3 Hidden neurons, 12 training points"
 plot cos(5*x-1)*exp(-x*x) with lines lw 2.5 lt 1 title "Analytical expression"\
 	,"data/test3Training.data" with points pt 3 ps 1.5 lt 8 title "Training points"\
 	,"data/test3Interpolation.data" using 1:2 with points pt 7 ps 1 lt 2 title "Interpolation by ann"
