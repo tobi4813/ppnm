@@ -1,0 +1,6 @@
+∫0π  dx/π ∫0π  dy/π ∫0π  dz/π [1-cos(x)cos(y)cos(z)]⁻¹ = 1.40440171894121
+  approximate error is 0.0224015119055235
+  1000000 points used
+Volume of sphere with radius 2:
+ monte carlo 100000 points: 33.6800026268189±0.117003862168537
+                     Exact: 33.5103216382911

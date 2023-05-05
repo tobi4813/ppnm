@@ -1,0 +1,17 @@
+set terminal svg background "white" size 500,800
+set output "Unitcircle.svg"
+
+set multiplot layout 2,1
+set title "Monte carlo integral of the unitcircle" font ",18"
+set xlabel "Log_{10}(N)" font ",16"
+
+set key font ",15"
+plot "data/uc.data" using 1:3 with lines title ""\
+	,"data/uc.data" using 1:3 with points pt 7 ps 0.6 lt 1 title "MC"\
+	,pi with lines lt 2 lw 2.5 
+
+set title "Graph has been shorted to N=1000 for visibility\n1/Sqrt(N) was fit to all the points up to N=10⁵" font ",18"
+set xrange[0:3]
+plot "data/uc.data" using 1:5 with points pt 7 ps 0.6 lt 2 title "Real error"\
+	,"data/uc.data" using 1:4 with lines lw 2 lt 1 title "Approximate error"\
+	,"data/ucFit.data" using 1:3 with lines lw 2 title "1/Sqrt(N) fit to real errors"
