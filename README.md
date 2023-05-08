@@ -9,8 +9,8 @@
 | 4  | Splines       	| 6 | 3 | - |  9  |
 | 5  | ODE           	| 6 | 3 | 1 |  10 |
 | 6  | Integration     	| 6 | 3 | - |  9  |
-| 7  | Monte Carlo     	| 6 | - | - |  6  |
+| 7  | Monte Carlo     	| 6 | 3 | - |  9  |
 | 8  | Root finding    	| 6 | 3 | - |  9  |
 | 9  | Minimization    	| 6 | 3 | 1 |  10 |
 | 10 | Neural Network  	| 6 | 3 | - |  9  |
-| .. | total points: 	| - | - | - |  89 |
+| .. | total points: 	| - | - | - |  92 |
