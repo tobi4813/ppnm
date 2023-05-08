@@ -43,6 +43,11 @@ static class main
 		using (StreamWriter output = new StreamWriter($"data/q{name}Derivative.data"))
 		{
 			(genlist<double> x,genlist<double> y) = qSpline.Qderivative(resolution);
+			for(int i=0;i<x.size;i++) output.WriteLine($"{x[i]} {y[i]}");	
+		}	
+		using (StreamWriter output = new StreamWriter($"data/q{name}Antiderivative.data"))
+		{
+			(genlist<double> x,genlist<double> y) = qSpline.Qantiderivative(resolution, offset: -1);
 			for(int i=0;i<x.size;i++) output.WriteLine($"{x[i]} {y[i]}");		
 		}
 

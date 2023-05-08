@@ -30,13 +30,17 @@ set output "Qspline.svg"
 set multiplot layout 2,1
 
 plot "data/qRandompoints.data" with points pt 7 title ""\
-	,"data/qRandom.data" with lines lw 5 title ""\
-	,"data/qRandomDerivative.data" with lines lw 2 lt 1 title "derivative of qSpline"
+	,"data/qRandom.data" with lines lw 5 title "Random qSpline"\
+	,"data/qRandomDerivative.data" with lines lw 2 lt 1 title "derivative of qSpline"\
+	,"data/qRandomAntiderivative.data" with lines lw 4 lt 3 title "antiderivative of qSpline"
 
 set title "Sin(x). Area from 0 to 2.25 is 1.630 (should be 1.628)\n\
 	Area from 0 to Pi is 2.002 (should be 2)\n\
 	Area from 0 to 2 Pi is 0 (should be 0)"
+set key below
 plot "data/qSinepoints.data" with points pt 7 title ""\
-	,"data/qSine.data" with lines lw 5 title ""\
+	,"data/qSine.data" with lines lw 5 title "Spline of sin(x)"\
 	,cos(x) with lines lt 4 lw 6\
-	,"data/qSineDerivative.data" with lines lw 2 lc rgb "black" title "Derivative of quad spline"
+	,"data/qSineDerivative.data" with lines lw 2 lc rgb "black" title "Derivative of quad spline"\
+	,-cos(x) with lines lt 3 lw 7\
+	,"data/qSineAntiderivative.data" with lines lw 2 lc rgb "blue" title "Antiderivative"

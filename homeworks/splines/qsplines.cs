@@ -50,5 +50,16 @@ public partial class Spline
 		Func<int,double,double> S = (i,x) => b[i] + 2*c[i]*(x-this.x[i]);
 		return Graph(S,resolution);
 	}
+	public (genlist<double>,genlist<double>) Qantiderivative(int resolution, double offset=0)
+	{
+		Func<int,double,double> S = (i,z) =>
+		{
+			Qintegral(x[i]);
+			double start = x[i];
+			double s = (y[i]-b[i]*x[i]+c[i]*x[i]*x[i])*(z-start)+(b[i]/2-start*c[i])*(z*z-start*start)+c[i]/3*(z*z*z-start*start*start);
+			return s+A+offset;
+		};
+		return Graph(S,resolution);
+	}
 	
 }

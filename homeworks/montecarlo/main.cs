@@ -9,9 +9,8 @@ static class main
 	static void Main()
 	{
 		Unitcircle();
-		Wtf();
+		//Wtf();
 		Sphere();
-		
 	}
 	static void Wtf()
 	{
@@ -40,6 +39,8 @@ static class main
 		WriteLine($"Volume of sphere with radius 2:");
 		WriteLine($" monte carlo {N} points: {integral}±{err}");
 		WriteLine($"                     Exact: {4*PI*8/3}");
+		(integral,err) = MC.QuasiMC(Spherical,a,b,N);
+		WriteLine($"         quasi monte carlo: {integral}±{err}");
 	}
 	static void Unitcircle()
 	{
@@ -60,8 +61,9 @@ static class main
 				int N = (int)Pow(10,n);
 				Ns[i] = N;
 				(double integral, double error) = MC.PlainMC(UnitCircle,a,b,N);
+				(double qIntegral, double qError) = MC.QuasiMC(UnitCircle,a,b,N);
 				realError[i] = Abs(PI - integral);
-				output.WriteLine($"{n} {N} {integral} {error} {realError[i]}"); 
+				output.WriteLine($"{n} {N} {integral} {error} {realError[i]} {qIntegral} {qError}"); 
 			}
 		}	
 		Func<vector,int,double> FitFunc = (scale,N) => scale[0]/Sqrt(N);
