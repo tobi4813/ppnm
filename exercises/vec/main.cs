@@ -14,9 +14,14 @@ public static class main
 		w.print("u*2=");
 		(-u).print("-u=");
 		WriteLine($"u*v = {u*v}");
-		WriteLine($"u*v = {u.dot(v)}");
+		WriteLine($"u.dot(v) = {u.dot(v)}");
 		vec crossed = u.cross(v);
-		crossed.print("u x v = ");
+		crossed.print("u cross v = ");
 		WriteLine($"|u| = {u.norm()}");
+		vec almostU = new vec(1.000000000001, 2.000000000001, 3.0000000000001);
+		WriteLine($"u approx v ? {u.approx(v)}");
+		almostU.print("almost-u: ");
+		WriteLine($"u approx almost-u ? {u.approx(almostU)}");
+		WriteLine($"Vector u as string: {u.ToString()}");
 	}
 }

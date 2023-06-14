@@ -1,3 +1,4 @@
+using System;
 using static System.Console;
 using static System.Math;
 
@@ -7,7 +8,6 @@ public static class main
 	{
 		foreach(var arg in args)
 		{
-			Write(arg);
 			var words = arg.Split(":");
 			if (words[0] == "-numbers")
 			{

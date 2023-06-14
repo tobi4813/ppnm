@@ -4,5 +4,5 @@ Out.txt : hello.exe
 hello.exe : hello.cs
 	mcs hello.cs
 
-clean:
+clean :
 	rm -f Out.txt hello.exe

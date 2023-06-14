@@ -14,3 +14,15 @@
 | 9  | Minimization    	| 6 | 3 | 1 |  10 |
 | 10 | Neural Network  	| 6 | 3 | - |  9  |
 | .. | total points: 	| - | - | - |  92 |
+
+| # | Exercises       | ✓ | 
+| - | ----------------| - |
+| 2 | hello           | ✓ | 
+| 3 | math  	      | ✓ |
+| 4 | epsilon         | ✓ |
+| 4 | vec             | ✓ |
+| 5 | input/output    | ✓ |
+| 5 | complex     	  | ✓ |
+| 6 | generic list    |  |
+| 7 | multiprocessing |  |
+| 8 | plots           |  |

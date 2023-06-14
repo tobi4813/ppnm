@@ -1,2 +1,19 @@
-sum of A = 1
-sum of B = 1.00000000011102
+My highest integer is 2147483647
+The correct value is  2147483647
+My lowest integer is -2147483648
+The correct value is -2147483648
+
+Machine epsilon for doubles: 2.22044604925031E-16
+Should be close to 1.19209289550781E-07
+Machine epsilon for floats: 1.192093E-07
+Should be close to 2.22044604925031E-16
+
+sumA - 1 = 0.000000e+000
+Should be  1.110223e-010
+sumB - 1 = 1.110223e-010
+Should be  1.110223e-010
+
+d1=7.999999999999999e-001
+d2=8.000000000000000e-001
+d1==d2 ? => False
+d1 approx d2 ? => True

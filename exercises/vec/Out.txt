@@ -4,6 +4,10 @@ v+u=3 5 7
 u*2=2 4 6
 -u=-1 -2 -3
 u*v = 20
-u*v = 20
-u x v = -1 2 -1
+u.dot(v) = 20
+u cross v = -1 2 -1
 |u| = 14
+u approx v ? False
+almost-u: 1.000000000001 2.000000000001 3.0000000000001
+u approx almost-u ? True
+Vector u as string: 1 2 3

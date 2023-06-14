@@ -1,4 +1,4 @@
-DIR = $(HOME)/Documents/Uni/ppnm/matlib/complex
+DIR = ../../matlib/complex
 
 Out.txt : main.exe
 	mono main.exe > Out.txt
@@ -8,3 +8,6 @@ main.exe : main.cs cmath.dll
 
 cmath.dll : $(DIR)/cmath.cs $(DIR)/complex.cs
 	mcs -target:library -out:./cmath.dll $^
+
+clean :
+	rm *.txt *.dll *.exe

@@ -5,38 +5,50 @@ public static class main
 {
 	public static void Main()
 	{
-		WriteLine("hello");
 		complex I = new complex(0,1);
-		double a = -1;
-		double b = 0;
-		complex z = a+b*I;
-		z.print("complex number z=");
-		cmath.sqrt(z).print("sqrt(-1)=");
-		if (z.approx(new complex(-1,0))) Write("sqrt(-1) very close to -i\n\n");
-		else Write("Not close enough to -i\n\n");
+		complex minusOne = new complex(-1,0);
+
+		complex sqrtMinusOne = cmath.sqrt(minusOne);
+		sqrtMinusOne.print("          sqrt(-1) = ");
+		complex shouldBe = I;
+		if (sqrtMinusOne.approx(shouldBe)) shouldBe.print("sqrt(-1) is actually ");
+		else shouldBe.print("Not close enough to ");
 		
-		z = I;
-		z.print("complex number z=");
-		cmath.exp(z).print("exp(z)=");
+		complex sqrtI = cmath.sqrt(I);
+		sqrtI.print("\n          sqrt(i) = ");
+		shouldBe = new complex(1/Sqrt(2), 1/Sqrt(2));
+		if (sqrtI.approx(shouldBe)) shouldBe.print("sqrt(i) is actually ");
+		else shouldBe.print("Not close enough to ");
 
-		complex expIPi = cmath.exp(z*PI); 	
-		expIPi.print("\nexp(i*PI)=");
-		if (expIPi.approx(new complex(-1,0))) Write("exp(i*pi) Very close to -1+0i\n\n");
-		else Write("Not close enough to -1+0i\n\n");
+		complex expI = cmath.exp(I);
+		expI.print("\n          exp(i) = ");
+		shouldBe = new complex(Cos(1), Sin(1));
+		if (expI.approx(shouldBe)) shouldBe.print("exp(i) is actually ");
+		else shouldBe.print("Not close enough to ");
 
-		complex iSquared = cmath.pow(z,z);
-		iSquared.print("i^i=");
-		if (iSquared.approx(Exp(-PI/2))) Write($"i^i Very close to exp(-pi/2)={Exp(-PI/2)}\n\n");
-		else Write($"Not close enough to exp(-pi/2)={Exp(-PI/2)}\n\n");
 
-		complex logI = cmath.log(z);
-		logI.print("ln(i)=");
-		if (logI.approx(new complex(0, PI/2))) Write($"ln(i) Very close to i*Pi/2={PI/2}i\n\n");
-		else Write($"Not close enough i*Pi/2={PI/2}i\n\n");
+		complex expIPi = cmath.exp(I*PI); 	
+		expIPi.print("\n          exp(i*PI) = ");
+		shouldBe = new complex(Cos(PI), Sin(PI));
+		if (expIPi.approx(shouldBe)) shouldBe.print("exp(i*PI) is actually ");
+		else shouldBe.print("Not close enough to ");
+
+		complex iSquared = cmath.pow(I,I);
+		iSquared.print("\n          i^i = ");
+		shouldBe = new complex(Exp(-PI/2), 0);
+		if (iSquared.approx(shouldBe)) shouldBe.print("i^i is actually ");
+		else shouldBe.print("Not close enough to ");
+		
+		complex logI = cmath.log(I);
+		logI.print("\n          ln(i) = ");
+		shouldBe = new complex(0, PI/2);
+		if (logI.approx(shouldBe)) shouldBe.print("ln(i) is actually ");
+		else shouldBe.print("Not close enough to ");
 
 		complex sinPiI = cmath.sin(PI*I);
-		sinPiI.print("sin(i*Pi)=");
-		if (sinPiI.approx(I*Sinh(PI))) Write($"sin(i*Pi) Very close to sinh(pi)*i={Sinh(PI)}i\n\n");
-		else Write($"Not close enough to sinh(pi)*i={Sinh(PI)}i\n\n");
+		sinPiI.print("\n          sin(i*Pi) = ");
+		shouldBe = new complex(0, Sinh(PI));
+		if (sinPiI.approx(shouldBe)) shouldBe.print("sin(i*PI) is actually ");
+		else shouldBe.print("Not close enough to ");
 	}
 }
