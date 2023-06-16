@@ -3,17 +3,17 @@
 
 | #  | homework         | A | B | C | Σ   | 
 | -- | -----------------| - | - | - | --- |
-| 1  | Linear equations | 6 | 3 | - |  9  |
+| 1  | Linear equations | 6 | 3 | 1 | 10  |
 | 2  | EVD           	| 6 | 3 | - |  9  | 
 | 3  | Least Squares  	| 6 | 3 | - |  9  |
 | 4  | Splines       	| 6 | 3 | - |  9  |
-| 5  | ODE           	| 6 | 3 | 1 |  10 |
+| 5  | ODE           	| 6 | 3 | 1 | 10  |
 | 6  | Integration     	| 6 | 3 | - |  9  |
 | 7  | Monte Carlo     	| 6 | 3 | - |  9  |
 | 8  | Root finding    	| 6 | 3 | - |  9  |
-| 9  | Minimization    	| 6 | 3 | 1 |  10 |
+| 9  | Minimization    	| 6 | 3 | 1 | 10  |
 | 10 | Neural Network  	| 6 | 3 | - |  9  |
-| .. | total points: 	| - | - | - |  92 |
+| .. | total points: 	| - | - | - | 93  |
 
 | # | Exercises       | ✓ | 
 | - | ----------------| - |

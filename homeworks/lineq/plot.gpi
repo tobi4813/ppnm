@@ -1,0 +1,15 @@
+set terminal svg background "white" size 500,800
+set output "OperationCount.svg"
+set multiplot layout 2,1
+
+set xlabel "N" font ",16"
+set ylabel "t (s)" font ",16
+set key font ",16"
+plot "QRtimes.data" with points pt 7 title "Measured timings" \
+	,"fit.data" with lines title "c*N³ fit. See Out.txt for c"
+
+
+set title "Loglog scale:" font ",20"
+set logscale xy
+plot "QRtimes.data" with points pt 7 title "" \
+	,"fit.data" with lines title ""

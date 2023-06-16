@@ -2,10 +2,11 @@ public class QRGS
 {
 	public matrix Q, R;
 	int m;
-	public QRGS(matrix A)
+	public QRGS(matrix A, bool copy=true)
 	{
 		m = A.size2;
-		Q = A.copy(); // Q = A, if we want to overwrite A as we make Q
+		if(copy) Q = A.copy(); // Q = A, if we want to overwrite A as we make Q
+		else Q = A;
 		R = new matrix(m,m);
 		QRDecomp(Q, R);
 	}
