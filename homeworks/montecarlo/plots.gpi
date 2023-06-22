@@ -1,4 +1,4 @@
-set terminal svg background "white" size 1000,800
+set terminal svg background "white" size 1050,800
 set output "Unitcircle.svg"
 
 set multiplot layout 2,2
@@ -8,7 +8,7 @@ set xlabel "Log_{10}(N)" font ",16"
 set key font ",15"
 plot "data/uc.data" using 1:3 with lines title ""\
 	,"data/uc.data" using 1:3 with points pt 7 ps 0.6 lt 1 title "MC"\
-	,pi with lines lt 2 lw 2.5 
+	,pi with lines lt 2 lw 2.5
 
 set title "Quasi-random montecarlo integral of the unitcircle" font ",18"
 plot "data/uc.data" using 1:6 with lines title ""\
@@ -16,8 +16,11 @@ plot "data/uc.data" using 1:6 with lines title ""\
 	,pi with lines lt 2 lw 2.5
 
 set logscale x 10
-set title "Graph has been shorted to N=1000 for visibility\n1/Sqrt(N) was fit to all the points up to N=10⁵" font ",18"
-set xrange[10**0:10**3]
+set xlabel "N"
+set title "Graph has been shorted to N=1000 for visibility\n1/Sqrt(N) was fit to all the points up to N=10^5\n\
+			The errors might be a evaluated for >1 point for very low values\n\
+			 of N, because of I've calculated N as 10^n and rounded it to an int" font ",18"
+set xrange[10**0:10**4]
 plot "data/uc.data" using 2:5 with points pt 7 ps 0.6 lt 2 title "Real error"\
 	,"data/uc.data" using 2:4 with lines lw 2 lt 1 title "Approximate error"\
 	,"data/ucFit.data" using 2:3 with lines lw 2 title "1/Sqrt(N) fit to real errors"
@@ -25,6 +28,26 @@ plot "data/uc.data" using 2:5 with points pt 7 ps 0.6 lt 2 title "Real error"\
 set xrange[10:10**5]
 set xlabel "N"
 set logscale xy 10
-set title "Comparing random mc error with quasi-random mc error"
+set title "Comparing random mc error with quasi-random mc error\n\
+			The quasiMC error is not drawing lines between\n all points for some reason"
 plot "data/uc.data" using 2:4 with lines lw 2 lt 1 title "MC error"\
-	,"data/uc.data" using 2:7 with lines lw 2 title "quasiMC error"
+	,"data/uc.data" using 2:7 with lines lw 2 title "quasiMC error"#\
+	#,"data/uc.data" using 2:7 with points pt 7 title "quasiMC error"
+
+unset xrange
+unset xlabel
+unset logscale
+unset title
+unset multiplot
+
+set terminal svg background "white" size 1200,426
+set output "Samples.svg"
+set multiplot layout 1,3 title "Plain-, Quasi- and Recursive-Stratified samples (N≈8000)" font ",20"  
+set key autotitle columnheader center top outside font ",16"
+
+plot "data/samples_plain.data" with points pt 7 ps 0.2 lc 3
+
+plot "data/samples_quasi.data" with points pt 7 ps 0.2 lc 3
+
+plot "data/samples_stratified.data" with points pt 7 ps 0.2 lc 3
+	#,"data/circle.data" with lines lw 2 lc 1 title ""

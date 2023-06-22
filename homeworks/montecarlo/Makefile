@@ -10,16 +10,16 @@ plot : plots.gpi Out.txt
 Out.txt : main.exe
 	mono main.exe > Out.txt
 
-main.exe : main.cs linalg.dll mini.dll mc.dll
+main.exe : main.cs linalg.dll ppnm.dll mc.dll
 	mcs $(CODE) $(DLLS)
 
 linalg.dll : $(MATLIBDIR)/matrix.cs $(MATLIBDIR)/vector.cs
 	$(MKLIB)
 
-mini.dll : ../minimization/mini.cs linalg.dll
+ppnm.dll : ../minimization/mini.cs $(GENLISTDIR)/genlist.cs linalg.dll
 	$(MKLIB)
 
-mc.dll : mc.cs linalg.dll
+mc.dll : mc.cs linalg.dll ppnm.dll
 	$(MKLIB)
 
 clean :

@@ -9,10 +9,77 @@ static class main
 	static void Main()
 	{
 		Unitcircle();
-		//Wtf();
+		Wtf();
 		Sphere();
+		Stratified();
 	}
-	static void Wtf()
+	static void Stratified()
+	{
+		vector a = new vector(-1,-1);
+		vector b = new vector(1,1);
+		Func<vector,double> fun = x => 
+		{
+			if(x.norm() <= 1) return 1;
+			return 0;
+		};
+		genlist<double> xs = new genlist<double>();
+		genlist<double> ys = new genlist<double>();
+		//MC.PlainMC(fun,a,b,10000,xs,ys);
+
+		int N = 8000;
+		(double integral, double err) = MC.StratifiedMC(fun, a, b ,N , nmin: 10/*(int) (N/200)*/, xs: xs, ys: ys);
+		//WriteLine($"mc:     {integral}");
+		//WriteLine($"Actual: {PI/4*0.8*0.8}");
+		//WriteLine(err);
+		//WriteLine(xs.size);
+		N = xs.size;
+		using (var output = new StreamWriter("data/samples_stratified.data"))
+		{
+			output.WriteLine($"\"Area estimated as {Math.Round(integral,4)}±{Math.Round(err,4)}\"");
+			if(xs.size > 0) for(int i=0;i<xs.size;i++) output.WriteLine($"{xs[i]} {ys[i]}");
+			else output.WriteLine("0 0");
+		}
+
+		
+		xs = new genlist<double>();
+		ys = new genlist<double>();
+		(integral, err) = MC.PlainMC(fun,a,b,N,xs,ys);
+		using (var output = new StreamWriter("data/samples_plain.data"))
+		{
+			output.WriteLine($"\"Area estimated as {Math.Round(integral,4)}±{Math.Round(err,4)}\"");
+			if(xs.size > 0) for(int i=0;i<xs.size;i++) output.WriteLine($"{xs[i]} {ys[i]}");
+			else output.WriteLine("0 0");
+			
+		}
+
+
+		xs = new genlist<double>();
+		ys = new genlist<double>();
+		(integral, err) = MC.QuasiMC(fun,a,b,N,xs,ys);		
+		using (var output = new StreamWriter("data/samples_quasi.data"))
+		{
+			output.WriteLine($"\"Area estimated as {Math.Round(integral,4)}±{Math.Round(err,4)}\"");
+			if(xs.size > 0) for(int i=0;i<xs.size;i++) output.WriteLine($"{xs[i]} {ys[i]}");
+			else output.WriteLine("0 0");
+		}
+
+		
+		using (var output = new StreamWriter("data/circle.data")){
+			for(int i=0;i<1000;i++)
+			{
+				double x = a[0] + (b[0] - a[0])/999*i;
+				double y = Sqrt(1-x*x);
+				output.WriteLine($"{x} {y}");
+			}	
+			for(int i=0;i<1000;i++)
+			{
+				double x = a[0] + (b[0] - a[0])/999*i;
+				double y = -Sqrt(1-x*x);
+				output.WriteLine($"{-x} {y}");
+			}
+		}
+	}
+	static void Wtf() //What the func?
 	{
 		vector a = new vector(0,0,0);
 		vector b = new vector(PI,PI,PI);
@@ -26,14 +93,14 @@ static class main
 		(double integral, double err) = MC.PlainMC(fun,a,b,N);
 		WriteLine($"∫0π  dx/π ∫0π  dy/π ∫0π  dz/π [1-cos(x)cos(y)cos(z)]⁻¹ = {integral}");
 		WriteLine($"  approximate error is {err}"); 
-		WriteLine($"  {N} points used");
+		WriteLine($"  {N} points used\n");
 		
 	}
 	static void Sphere()
 	{
-		vector a = new vector(0,0,0);
-		vector b = new vector(2,PI,2*PI);
-		Func<vector,double> Spherical = x => x[0]*x[0]*Sin(x[1]);
+		vector a = new vector(-2,-2,-2);
+		vector b = new vector(2,2,2);
+		Func<vector,double> Spherical = x => {if(x.norm()>2) return 0; return 1;}; 
 		int N = 100000;
 		(double integral,double err) = MC.PlainMC(Spherical,a,b,N);
 		WriteLine($"Volume of sphere with radius 2:");
@@ -44,10 +111,10 @@ static class main
 	}
 	static void Unitcircle()
 	{
-		vector a = new vector(0,0);
-		vector b = new vector(1,2*PI);
-		Func<vector,double> UnitCircle = x => x[0]; // area of circle is integral of r dr d(theta), so the function is just r (= x[0])
-		int resolution = 60;
+		vector a = new vector(-1,-1);
+		vector b = new vector(1,1);
+		Func<vector,double> UnitCircle = x => {if(x.norm()>1) return 0; return 1;};
+		int resolution = 60;//0;
 		double  min = 1;
 		double  max = 1e5;
 		Directory.CreateDirectory("data");

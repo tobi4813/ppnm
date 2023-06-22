@@ -8,7 +8,7 @@ public class main
 {
 	public static void Main()
 	{
-		//tests();
+		tests();
 		fit();
 	}
 	public static void tests()
@@ -98,7 +98,7 @@ public class main
 		};
 		vector guess = new vector(1e-9);
 		vector optimalParameters = amoeba(Deviation, guess, acc: 1e-11).Item1;
-		WriteLine($"The time it takes goes as {optimalParameters[0]:e2} N³");
+		WriteLine($"The time it takes to QR-factorize goes as {optimalParameters[0]:e2} N³");
 		int resolution = 100;
 		using(var output = new StreamWriter("fit.data"))
 		{
