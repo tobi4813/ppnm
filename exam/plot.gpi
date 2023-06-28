@@ -1,0 +1,7 @@
+set terminal svg background "white"
+set output "Plot.svg"
+
+plot "data/test_interp.data" using 1:2 with lines\
+	,"data/test_interp.data" using 1:3 with lines
+	#,"Out.txt" with points pt 7 
+

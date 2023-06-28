@@ -10,9 +10,6 @@ public partial class Spline
 	{
 		this.x = x;
 		this.y = y;
-		/*b = new double[x.Length];
-		c = new double[x.Length];
-		d = new double[x.Length];*/
 	}
 	(genlist<double>,genlist<double>) Graph(Func<int,double,double> S, int resolution) // S(i,x) = ...
 	{

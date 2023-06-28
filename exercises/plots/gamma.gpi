@@ -1,4 +1,4 @@
-set terminal svg 
+set terminal svg background "white"
 set output "Gamma.svg"
 set key bottom right
 set xlabel "x"
@@ -10,5 +10,12 @@ set samples 2000
 set title "Gamma function"
 plot [-5:5][-5:5] \
 	"gamma.data" with lines linetype 1 title "theory"\
-	,"factorials.data" using ($1+1):($2) with points pointtype 4 title "experiment" \
-	,gamma(x) with lines linetype 2 title "built-in-gamma"
+	,"factorials.data" using ($1+1):($2) with points pointtype 4 title "experiment" #\
+	#,gamma(x) with lines linetype 2 title "built-in-gamma"
+
+set output "erf.svg"
+set title "Error function"
+
+plot [-2:3][-1.1:1.1]\
+	"erf.data" with lines title "Approximation"\
+	,"erfPoints.data" with points pt 3 title "tabulated points"

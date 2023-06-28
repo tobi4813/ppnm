@@ -1,16 +1,20 @@
-21.3004815023487
-real 2.19
-user 9.92
+Using Parallel.For: 13.4971028439378
+real 0.76
+user 5.85
 sys 0.01
-21.3004815023488
-real 2.91
-user 14.49
-sys 0.01
-21.3004815023486
-real 2.11
-user 13.05
+Sum using 1 threads: 18.3047492382933
+real 0.25
+user 0.25
 sys 0.00
-21.3004815023489
-real 2.13
-user 15.11
+Sum using 2 threads: 18.30474923829
+real 0.21
+user 0.35
+sys 0.00
+Sum using 3 threads: 18.3047492382925
+real 0.17
+user 0.42
+sys 0.00
+Sum using 4 threads: 18.304749238292
+real 0.13
+user 0.39
 sys 0.00

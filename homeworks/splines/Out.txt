@@ -7,7 +7,65 @@ Area of sin(x):
   From 0 to 2.25 is ~1.61175347982037 (is actually 1.628)
   From 0 to pi is ~1.97965081121648 (is actually 2)
 
+Veriying coefficients:
+ For x: 1, 2, 3, 4, 5
+     y: 1, 1, 1, 1, 1
+  B coefficient:
+   By program: 0 0 0 0 
+        By me: 0 0 0 0 
+  C coefficient:
+   By program: 0 0 0 0 
+        By me: 0 0 0 0 
+
+ For x: 1, 2, 3, 4, 5
+     y: 1, 2, 3, 4, 5
+  B coefficient:
+   By program: 1 1 1 1 
+        By me: 1 1 1 1 
+  C coefficient:
+   By program: 0 0 0 0 
+        By me: 0 0 0 0 
+
+ For x: 1, 2, 3, 4, 5
+     y: 1, 4, 9, 16, 25
+  B coefficient:
+   By program: 2 4 6 8 
+        By me: 2 4 6 8 
+  C coefficient:
+   By program: 1 1 1 1 
+        By me: 1 1 1 1 
+
+
 Area of Sine beneath a quadratic spine:
   From 0 to 2.25: 1.63013434410276 (should be 1.628)
   From 0 to 3.14159265358979: 2.0021027456339 (should be 2)
   From 0 to 6.28318530717959: 1.38777878078145E-16 (should be 0)
+
+Veriying coefficients:
+ For x: 1, 2, 3, 4, 5
+     y: 1, 1, 1, 1, 1
+  B coefficient:
+   By program: 0 0 0 0 
+        By me: 0 0 0 0 
+  C coefficient:
+   By program: 0 0 0 0 
+        By me: 0 0 0 0 
+
+ For x: 1, 2, 3, 4, 5
+     y: 1, 2, 3, 4, 5
+  B coefficient:
+   By program: 1 1 1 1 
+        By me: 1 1 1 1 
+  C coefficient:
+   By program: 0 0 0 0 
+        By me: 0 0 0 0 
+
+ For x: 1, 2, 3, 4, 5
+     y: 1, 4, 9, 16, 25
+  B coefficient:
+   By program: 2 4 6 8 
+        By me: 2 4 6 8 
+  C coefficient:
+   By program: 1 1 1 1 
+        By me: 1 1 1 1 
+

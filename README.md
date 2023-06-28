@@ -15,7 +15,7 @@
 | 10 | Neural Network  	| 6 | 3 | - |  9  |
 | .. | total points: 	| - | - | - | 93½ |
 
-| # | Exercises       | ✓ | 
+| # | Exercises       |   | 
 | - | ----------------| - |
 | 2 | hello           | ✓ | 
 | 3 | math  	      | ✓ |
@@ -23,6 +23,6 @@
 | 4 | vec             | ✓ |
 | 5 | input/output    | ✓ |
 | 5 | complex     	  | ✓ |
-| 6 | generic list    |  |
-| 7 | multiprocessing |  |
-| 8 | plots           |  |
+| 6 | generic list    | ✓ |
+| 7 | multiprocessing | ✓ |
+| 8 | plots           | ✓ |

@@ -1,5 +1,6 @@
 using System;
 using System.Threading; 
+using System.Threading.Tasks;
 using static System.Console;
 public static class main
 {
@@ -34,7 +35,8 @@ public static class main
 
 		for (int i=0; i<nthreads; i++) sum += x[i].sum;
 
-		WriteLine(sum);
+		WriteLine($"Sum using {nthreads} threads: {sum}");
+
 	}
 	
 	public static void harmonic_sum(object obj)
