@@ -86,7 +86,7 @@ unset multiplot
 unset title
 unset size
 
-set terminal gif animate delay 5
+set terminal gif animate delay 2.5
 set output "Plots/Eight_animation.gif"
 stats "data/eight_lines1_anim.data" nooutput
 
