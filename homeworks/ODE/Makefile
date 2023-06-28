@@ -10,7 +10,7 @@ TIME = time --portability --append --output Out.txt
 #$(info Making the data may take up to ~1s depending on hardware)
 
 plots : plots.gpi Out.txt main.cs ode.cs
-	gnuplot $<
+	gnuplot $< 2>log
 
 Out.txt : main.exe
 	#$(TIME)\
@@ -29,5 +29,5 @@ ode.dll : ode.cs linalg.dll genlist.dll
 	$(MKLIB)
 
 clean :
-	rm *.exe *.dll Out* *.svg \
+	rm log *.exe *.dll Out* *.svg\
 	rm -rfv data Plots

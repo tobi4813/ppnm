@@ -88,8 +88,37 @@ public class main
 		double vx3=-0.93240737, vy3=-0.86473146, vx1=-vx3/2, vy1=-vy3/2, vx2=vx1, vy2=vy1;
 		vector y0 = new vector($"{x1} {y1} {vx1} {vy1} {x2} {y2} {vx2} {vy2} {x3} {y3} {vx3} {vy3}");
 
-		(xs,ys) = drive(Gravitation, 0, y0, 6.32591398, acc: 1e-6, eps: 1e-6,method: "rkf45"); //1e-8 1e-9
+		(xs,ys) = drive(Gravitation, 0, y0, 2*6.32591398, acc: 1e-6, eps: 1e-6,method: "rkf45"); //1e-8 1e-9
 		WriteData(xs, ys, "t x1 m_1 vx1 vy1 x2 m_2 vx2 vy2 x3 m_3 vx3 vy3", "eight.data");
+
+		var points = new StreamWriter("data/eight_points_anim.data");
+		var lines1 = new StreamWriter("data/eight_lines1_anim.data");
+		var lines2 = new StreamWriter("data/eight_lines2_anim.data");
+		var lines3 = new StreamWriter("data/eight_lines3_anim.data");
+		int res = xs.size;
+		for(int i=0;i<res;i++)
+		{
+			
+			if(i > 0) 
+			{
+				for(int j=0;j<i+1;j++) lines1.WriteLine($"{ys[j][0]} {ys[j][1]}");
+				lines1.WriteLine("\n");
+
+				for(int j=0;j<i+1;j++) lines2.WriteLine($"{ys[j][4]} {ys[j][5]}");
+				lines2.WriteLine("\n");
+
+				for(int j=0;j<i+1;j++) lines3.WriteLine($"{ys[j][8]} {ys[j][9]}");
+				lines3.WriteLine("\n");
+			}
+			
+			points.WriteLine($"{ys[i][0]} {ys[i][1]}");
+			points.WriteLine($"{ys[i][0]} {ys[i][1]}");
+			points.WriteLine($"{ys[i][4]} {ys[i][5]}");
+			points.WriteLine($"{ys[i][8]} {ys[i][9]}");
+			points.WriteLine("\n");
+		}
+		points.Close();
+		lines1.Close();
 	}
 	
 	static void PlanetaryMotion()
