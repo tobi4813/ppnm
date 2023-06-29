@@ -11,7 +11,7 @@ static class main
 		random();
 		longSin();
 		sin();
-		OperationsCount(2);
+		OperationsCount(15);
 	}
 	static void random()
 	{
@@ -46,14 +46,15 @@ static class main
 		for(int i=0;i<xs.Length;i++) pointsFile.WriteLine($"{xs[i]} {ys[i]}");
 
 		var interpolationFile = new StreamWriter($"data/{filename}_interp.data");
-		interpolationFile.WriteLine("Points \"B_1 spline\" \"B_1 Derivative\" \"B_2 spline\"");
+		interpolationFile.WriteLine("Points \"B_1 spline\" \"B_1 Derivative\" \"B_2 spline\" \"B_2 derivative\"");
 		for(int i=0;i<resolution-1;i++)
 		{	
 			double x = xs[0] + (xs[xs.Length-1] - xs[0])/(resolution) * (i+1);
 			double y = spline.Berrut1(x);
 			double yPrime =	spline.B1Derivative(x);
 			double y2 = spline.Berrut2(x);
-			interpolationFile.WriteLine($"{x} {y} {yPrime} {y2}"); 
+			double y2Prime = spline.B2Derivative(x);
+			interpolationFile.WriteLine($"{x} {y} {yPrime} {y2} {y2Prime}"); 
 		}
 		pointsFile.Close();
 		interpolationFile.Close();	
@@ -77,7 +78,7 @@ static class main
 	static void OperationsCount(int resolution)
 	{
 		double nmin = 1e6, nmax = 5e6;
-		int ntestPoints = 1;
+		int ntestPoints = 2;
 		Random rnd = new Random();
 		double[] testPoints = new double[ntestPoints];
 		for(int i=0;i<ntestPoints;i++) testPoints[i] = nmin + (nmax-nmin)*rnd.NextDouble();

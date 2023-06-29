@@ -5,7 +5,7 @@ CODE = $(filter %.cs,$^)
 MKLIB = mcs -target:library -out:$@ $(DLLS) $(CODE)
 
 plot : plot.gpi Out.txt
-	gnuplot $< #2>log
+	gnuplot $< 2>log
 
 Out.txt : main.exe
 	mono main.exe > Out.txt
