@@ -1,5 +1,8 @@
+system "mkdir -p Plots"
+
+# Test of spline
 set terminal svg background "white" size 600,1000
-set output "Plot.svg"
+set output "Plots/Splines.svg"
 
 set multiplot layout 3,1
 
@@ -7,26 +10,31 @@ set title "Random points" font ",20"
 set key autotitle columnheader below font ",16"
 plot "data/random_points.data" with points pt 7 lt 3 \
 	,"data/random_interp.data" using 1:2 with lines lt 1 lw 2 \
-	,"data/random_interp.data" using 1:3 with lines lt 2 lw 2
+	,"data/random_interp.data" using 1:3 with lines lt 2 lw 2 \
+	,"data/random_interp.data" using 1:4 with lines dt 3 lt 1 lw 2
 
 set title "Sinus points"
 set key below font ",16"
 plot "data/longSin_points.data" with points pt 7 lt 3\
-	,"data/longSin_interp.data" using 1:2 with lines lt 1 lw 2\
-	,"data/longSin_interp.data" using 1:3 with lines lt 2 lw 2 
+	,"data/longSin_interp.data" using 1:2 with lines lt 1 lw 2 \
+	,"data/longSin_interp.data" using 1:3 with lines lt 2 lw 2 \
+	,"data/longSin_interp.data" using 1:4 with lines dt 3 lt 1 lw 2
 
 set title "Sinus points"
 set key below font ",16"
 plot "data/sin_points.data" with points pt 7 lt 3 \
 	,"data/sin_interp.data" using 1:2 with lines lt 1 lw 2 \
-	,"data/sin_interp.data" using 1:3 with lines lt 2 lw 2
+	,"data/sin_interp.data" using 1:3 with lines lt 2 lw 2 \
+	,"data/sin_interp.data" using 1:4 with lines dt 3 lt 1 lw 2
 
+
+# Animations
 unset multiplot
 unset title
-unset key
+set key off
 
 set terminal gif animate delay 2
-set output "animation.gif"
+set output "Plots/animation.gif"
 stats "data/random_animation.data" nooutput
 
 set xrange [1:8]
@@ -36,4 +44,14 @@ do for[i=1:int(STATS_blocks)]{
 	plot "data/random_points.data" with points pt 7 ps 1.5 lt 3\
 	,"data/random_animation.data" index (i-1) with lines lt 1 lw 2
 }
+
+# Operations count
+unset xrange
+unset yrange
+set key off
+
+set terminal svg background "white"
+set output "Plots/Operation_time.svg"
+
+plot "data/operations.data" with points pt 7
 

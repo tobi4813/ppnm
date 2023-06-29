@@ -7,8 +7,6 @@ CODE = $(filter %.cs,$^)
 MKLIB = mcs -target:library -out:$@ $(DLLS) $(CODE)
 TIME = time --portability --append --output Out.txt
 
-#$(info Making the data may take up to ~1s depending on hardware)
-
 plots : plots.gpi Out.txt main.cs ode.cs
 	gnuplot $< 2>log
 

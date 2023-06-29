@@ -2,13 +2,14 @@ set terminal svg background "white" size 500,800
 set output "Higgs.svg"
 set multiplot layout 2,1
 
-set title "Mass from WikiPedia is 125.25(17) GeV/c²" 
+set title "Mass from WikiPedia is 125.25(17) GeV/c²" font ",18" 
 set xlabel "Energy (GeV)"
 set ylabel "Signal (certain units)"
 set key autotitle columnheader
 plot "higgs.dat" with yerrorbars pt 7 ps 0.7 lc rgb "black"\
 	,"fit.data" with lines dashtype 3 lw 3 lc rgb "#3f3f3f"
 
+set title "Fitting using downhill simplex"
 plot "higgs.dat" with yerrorbars pt 7 ps 0.7 lc rgb "black"\
 	,"amoebafit.data" with lines dashtype 3 lw 3 lc rgb "#3f3f3f"
 

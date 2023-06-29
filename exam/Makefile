@@ -5,7 +5,7 @@ CODE = $(filter %.cs,$^)
 MKLIB = mcs -target:library -out:$@ $(DLLS) $(CODE)
 
 plot : plot.gpi Out.txt
-	gnuplot $<
+	gnuplot $< #2>log
 
 Out.txt : main.exe
 	mono main.exe > Out.txt
@@ -22,7 +22,6 @@ genlist.dll : $(GENLISTDIR)/genlist.cs
 splines.dll : splines.cs linalg.dll genlist.dll
 	$(MKLIB)
 
-
 clean :
-	rm *.exe *.dll *.txt *.svg
-	rm -rfv data
+	rm *.exe *.dll Out.txt log
+	rm -rfv data Plots

@@ -11,14 +11,13 @@ static class main
 		SinusTest();
 		double[] xs = {1,2,3,4,5,6,7,8,9,10};
 		double[] ys = {1,4,2,6,12,2,9,7,10,5};
-		QsplineTest(xs,ys,"Random");
+		QsplineTest(xs,ys,"Random", testCoeff: true);
 		for(int i=0;i<10;i++) {xs[i] = 2*PI/9*i; ys[i] = Sin(xs[i]);}
 		QsplineTest(xs,ys,"Sine", areas: new double[] {2.25, PI, 2*PI, 1.628, 2, 0});
 
 	}
-	static void QsplineTest(double[] xs, double[] ys, string name, int resolution=50, double[] areas = null)
+	static void QsplineTest(double[] xs, double[] ys, string name, int resolution=50, double[] areas = null, bool testCoeff=false)
 	{
-			
 		Spline qSpline = new Spline(xs,ys);
 		qSpline.Qspline();
 		if(areas!=null) 
@@ -52,14 +51,17 @@ static class main
 			for(int i=0;i<x.size;i++) output.WriteLine($"{x[i]} {y[i]}");		
 		}
 
-		WriteLine("\nVeriying coefficients:");
-		xs = new double[] {1,2,3,4,5};
-		ys = new double[] {1,1,1,1,1};
-		Verify(xs, ys);
-		ys = new double[] {1,2,3,4,5};
-		Verify(xs, ys);
-		ys = new double[] {1,4,9,16,25};
-		Verify(xs, ys);
+		if(testCoeff)
+		{
+			WriteLine("\nVeriying coefficients:");
+			xs = new double[] {1,2,3,4,5};
+			ys = new double[] {1,1,1,1,1};
+			Verify(xs, ys);
+			ys = new double[] {1,2,3,4,5};
+			Verify(xs, ys);
+			ys = new double[] {1,4,9,16,25};
+			Verify(xs, ys);
+		}
 	}
 	static void Verify(double[] xs, double[] ys)
 	{

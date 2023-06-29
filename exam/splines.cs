@@ -4,8 +4,7 @@ using static System.Math;
 
 public partial class Spline
 {
-	public double[] x,y,b,c,d;
-	public double A;
+	public double[] x,y;
 	int n;
 	
 	public Spline(double[] x,double [] y)
@@ -14,7 +13,7 @@ public partial class Spline
 		this.y = y;
 		this.n = x.Length;
 	}
-	public double Berrut(double z)
+	public double Berrut1(double z)
 	{
 		double numerator = 0, denominator = 0;
 		for(int i=0;i<n;i++)
@@ -25,7 +24,7 @@ public partial class Spline
 		}
 		return numerator/denominator;
 	}
-	public double BDerivative(double z)
+	public double B1Derivative(double z)
 	{
 		double numerator = 0, denominator = 0, numeratorPrime = 0, denominatorPrime = 0;
 		for(int i=0;i<n;i++)
@@ -41,33 +40,19 @@ public partial class Spline
 		denominatorPrime /= (-denominator*denominator); // numerator = a, denominator = b: B1(x) = a/b, B1'(x) = a'/b + a*(1/b)', (1/b)' = d(1/b)/dx = d(1/b)/db * db/dx = (-1/b²)b'
 		return numeratorPrime/denominator + numerator*denominatorPrime;
 	}
-	/*public double BAntiDerivative(double z)
+	public double Berrut2(double z)
 	{
-		int i = 0;
-	}
-	int Binsearch(double z)
-	{
-		int i = 0; j = n;
-		while(j-i > 1)
+		double diff = z-x[0];
+		double numerator = y[0]/diff, denominator = 1/diff;
+		int k = 2;
+		for(int i=1;i<n-1;i++)
 		{
-			int mid = (i+j)/2;
-			if(z > x[mid]) i = mid; else j = mid;
+			if(i == n-2) k = 1;
+			diff = z-x[i];
+			numerator += k * Pow(-1, i) * y[i]/diff;
+			denominator += k * Pow(-1, i)/diff;
 		}
-		return i;
-	}*/
-
-	
-	(genlist<double>,genlist<double>) Graph(Func<int,double,double> S, int resolution) // S(i,x) = ...
-	{
-		genlist<double> xs = new genlist<double>();
-		genlist<double> ys = new genlist<double>();
-		for(int i=0;i<x.Length-1;i++)
-			for(int j=0;j<resolution;j++)
-			{
-				double x = this.x[i] + (this.x[i+1] - this.x[i])/(resolution-1)*j;
-				xs.add(x);
-				ys.add(S(i,x));
-			}
-		return (xs,ys);
+		return numerator/denominator;
+		
 	}
 }

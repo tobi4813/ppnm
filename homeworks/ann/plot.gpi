@@ -1,5 +1,5 @@
 set terminal svg background "white" size 1200,1600
-set output "test.svg"
+set output "Plot.svg"
 set multiplot layout 4,3
 
 set key below maxrows 2 width -8 font ",13"

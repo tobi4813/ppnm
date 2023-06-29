@@ -51,6 +51,6 @@ The derivative of r exp(-r) is (1-r)exp(-r), so the 2nd derivative is (r-2)exp(-
                                      = -0.5r exp(-r)
                                 ⇒ E₀ = -0.5   
 execution time for A) and B):
-real 2.48
-user 8.11
-sys 0.16
+real 2.65
+user 8.45
+sys 0.15

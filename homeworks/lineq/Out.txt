@@ -74,4 +74,4 @@ A*A⁻¹ below:
  -3.33e-16  -3.61e-16   1.67e-16  -3.33e-16          1   2.22e-16 
  -1.11e-16   2.78e-17   5.55e-17   2.22e-16          0          1 
 ------------------------------------------------------------------
-The time it takes to QR-factorize goes as 6.87e-009 N³
+The time it takes to QR-factorize goes as 6.92e-009 N³

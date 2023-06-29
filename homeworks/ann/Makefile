@@ -23,5 +23,5 @@ ann.dll : ann.cs mini.dll linalg.dll
 	$(MKLIB)
 
 clean :
-	rm *.exe *.dll *.txt *.svg
+	rm *.exe *.dll *.txt *.svg \
 	rm -rfv data
